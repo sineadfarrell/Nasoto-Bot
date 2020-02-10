@@ -1,0 +1,309 @@
+{
+  "luis_schema_version": "3.2.0",
+  "versionId": "0.1",
+  "name": "Makoto-Conversation",
+  "desc": "Luis Model for CoreBot",
+  "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "discussCampus"
+    },
+    {
+      "name": "discussHobbies"
+    },
+    {
+      "name": "discussFeeling"
+    },
+    {
+      "name": "discussCoursework"
+    },
+    {
+      "name": "discussLecture"
+    },
+    {
+      "name": "discussModule"
+    },
+    {
+      "name": "endConversation"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [],
+  "composites": [
+    {
+      "name": "From",
+      "children": [
+        "Airport"
+      ],
+      "roles": []
+    },
+    {
+      "name": "To",
+      "children": [
+        "Airport"
+      ],
+      "roles": []
+    }
+  ],
+  "closedLists": [
+    {
+      "name": "Module",
+      "subLists": [
+        {
+          "canonicalForm": "Spatial Information Systems",
+          "list": [
+            "COMP30110",
+            "spatial information systems",
+            "comp30110"
+          ]
+        },
+        {
+          "canonicalForm": "Human Computer Interaction",
+          "list": [
+            "human computer interaction",
+            "COMP47680",
+            "comp47880"
+          ]
+        },
+        {
+          "canonicalForm": "Connectionist Computing",
+          "list": [
+            "connectionist computing",
+            "COMP30230",
+            "comp30230"
+
+          ]
+        },
+        {
+          "canonicalForm": "Game Development",
+          "list": [
+            "game development",
+            "COMP30540",
+            "comp30540"
+          ]
+        },
+        {
+          "canonicalForm": "Ethical Computer Hacking",
+          "list": [
+            "ethical computer hacking",
+            "COMP30720",
+            "comp30720"
+          ]
+        },
+        {
+          "canonicalForm": "Advances in Wireless Networking",
+          "list": [
+            "advances in wireless networking",
+            "COMP40660",
+            "comp40660"
+          ]
+        },
+        {
+          "canonicalForm": "Contemporary Software Development",
+          "list": [
+            "contemporary software development",
+            "COMP47480",
+            "comp47480"
+          ]
+        },
+        {
+          "canonicalForm": "An Intro to Coding Theory",
+          "list": [
+            "an intro to coding theory",
+            "MATH30180",
+            "math30180"
+          ]
+        }
+        
+      ],
+      "roles": []
+    }
+  ],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [
+    {
+      "name": "datetimeV2",
+      "roles": []
+    }
+  ],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "I'm taking",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "I'm taking ethical computer hacking",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 24
+        }
+      ]
+    },
+    {
+      "text": "I'm taking connectionist computing",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 34
+        }
+      ]
+    },
+    {
+      "text": "book a hotel in new york",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "book a restaurant",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "I'm taking connectionist computing it is interesting",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 34
+        },
+        {
+          "entity": "Opinion",
+          "startPos": 41,
+          "endPos": 52
+        }
+      ]
+    },
+    {
+      "text": "I'm taking connectionist computing it is taught by Gianluca Pollastri",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 1,
+          "endPos": 34
+        },
+        {
+          "entity": "Lecturer",
+          "startPos": 41,
+          "endPos": 57
+        }
+      ]
+    },
+    {
+      "text": "I'm taking human language technologies",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "I'm feeling",
+      "intent": "discussFeeling",
+      "entities": []
+    },
+    {
+      "text": "I'm not feeling",
+      "intent": "discussFeeling",
+      "entities": []
+    },
+    {
+      "text": "I like",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "I like human language technologies",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 2,
+          "endPos": 6
+        },
+        {
+          "entity": "Module",
+          "startPos": 7,
+          "endPos": 34
+        }
+      ]
+    },
+    {
+      "text": "I don't like comp47480",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 2,
+          "endPos": 12
+        },
+        {
+          "entity": "Module",
+          "startPos": 13,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "I love COMP30110",
+      "intent": "discuss Module",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 2,
+          "endPos": 6
+        },
+        {
+          "entity": "Module",
+          "startPos": 7,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "I hate COMP30110",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 2,
+          "endPos": 6
+        },
+        {
+          "entity": "Module",
+          "startPos": 7,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "bye",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "goodbye",
+      "intent": "endConversation",
+      "entities": []
+    }
+
+  ],
+  "settings": []
+}

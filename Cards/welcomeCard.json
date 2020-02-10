@@ -1,0 +1,49 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "type": "AdaptiveCard",
+    "id": "NewUserGreeting",
+    "backgroundImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACeCAYAAACvg+F+AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAhdEVYdENyZWF0aW9uIFRpbWUAMjAxOTowMzoxMyAxOTo0Mjo0OBCBEeIAAAG8SURBVHhe7dJBDQAgEMCwA/+egQcmlrSfGdg6z0DE/oUEw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phSTEsKYYlxbCkGJYUw5JiWFIMS4phCZm52U4FOCAVGHQAAAAASUVORK5CYII=",
+    "body": [
+        {
+            "type": "Container",
+            "spacing": "none",
+            "backgroundImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAXCAIAAACAiijJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAqSURBVDhPY1RgL2SgDDBBaQrAqBEIMGoEAowagQCjRiDAqBEIQLERDAwAIisAxhgAwtEAAAAASUVORK5CYII=",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "id": "title",
+                    "spacing": "medium",
+                    "size": "large",
+                    "weight": "bolder",
+                    "color": "light",
+                    "text": "Hi, I'm **Makoto**",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "id": "body",
+                    "size": "Medium",
+                    "color": "Light",
+                    "text": "Now that I'm up and running, explore the links here to learn what I can do.",
+                    "wrap": true
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Get started",
+            "data": {
+                "action": "startOnboarding"
+            }
+        },
+        {
+            "type": "Action.OpenUrl",
+            "title": "Documentation",
+            "url": "https://aka.ms/bfvadocs"
+        }
+       
+    ]
+}
