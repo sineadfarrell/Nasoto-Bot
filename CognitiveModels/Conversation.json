@@ -1,7 +1,7 @@
 {
-  "luis_schema_version": "3.2.0",
+  "luis_schema_version": "4.0.0",
   "versionId": "0.1",
-  "name": "Makoto-Conversation",
+  "name": "Makoto-Bot-928e",
   "desc": "Luis Model for CoreBot",
   "culture": "en-us",
   "tokenizerVersion": "1.0.0",
@@ -10,16 +10,13 @@
       "name": "discussCampus"
     },
     {
-      "name": "discussHobbies"
+      "name": "discussExtracurricular"
     },
     {
       "name": "discussFeeling"
     },
     {
-      "name": "discussCoursework"
-    },
-    {
-      "name": "discussLecture"
+      "name": "discussLecturer"
     },
     {
       "name": "discussModule"
@@ -28,268 +25,76 @@
       "name": "endConversation"
     },
     {
+      "name": "greeting"
+    },
+    {
       "name": "None"
     }
   ],
-  "entities": [],
-  "composites": [
+  "entities": [
     {
-      "name": "From",
-      "children": [
-        "Airport"
-      ],
+      "name": "Emotion",
       "roles": []
     },
     {
-      "name": "To",
-      "children": [
-        "Airport"
-      ],
+      "name": "Extracurricular",
       "roles": []
-    }
-  ],
-  "closedLists": [
+    },
+    {
+      "name": "Lecturer",
+      "roles": []
+    },
     {
       "name": "Module",
-      "subLists": [
-        {
-          "canonicalForm": "Spatial Information Systems",
-          "list": [
-            "COMP30110",
-            "spatial information systems",
-            "comp30110"
-          ]
-        },
-        {
-          "canonicalForm": "Human Computer Interaction",
-          "list": [
-            "human computer interaction",
-            "COMP47680",
-            "comp47880"
-          ]
-        },
-        {
-          "canonicalForm": "Connectionist Computing",
-          "list": [
-            "connectionist computing",
-            "COMP30230",
-            "comp30230"
-
-          ]
-        },
-        {
-          "canonicalForm": "Game Development",
-          "list": [
-            "game development",
-            "COMP30540",
-            "comp30540"
-          ]
-        },
-        {
-          "canonicalForm": "Ethical Computer Hacking",
-          "list": [
-            "ethical computer hacking",
-            "COMP30720",
-            "comp30720"
-          ]
-        },
-        {
-          "canonicalForm": "Advances in Wireless Networking",
-          "list": [
-            "advances in wireless networking",
-            "COMP40660",
-            "comp40660"
-          ]
-        },
-        {
-          "canonicalForm": "Contemporary Software Development",
-          "list": [
-            "contemporary software development",
-            "COMP47480",
-            "comp47480"
-          ]
-        },
-        {
-          "canonicalForm": "An Intro to Coding Theory",
-          "list": [
-            "an intro to coding theory",
-            "MATH30180",
-            "math30180"
-          ]
-        }
-        
-      ],
+      "roles": []
+    },
+    {
+      "name": "Number",
+      "roles": []
+    },
+    {
+      "name": "NumberOfModules",
+      "roles": []
+    },
+    {
+      "name": "Opinion",
+      "roles": []
+    },
+    {
+      "name": "Place",
+      "roles": []
+    },
+    {
+      "name": "Stage",
+      "roles": []
+    },
+    {
+      "name": "UserName",
       "roles": []
     }
   ],
+  "composites": [],
+  "closedLists": [],
   "patternAnyEntities": [],
   "regex_entities": [],
-  "prebuiltEntities": [
-    {
-      "name": "datetimeV2",
-      "roles": []
-    }
-  ],
+  "prebuiltEntities": [],
   "model_features": [],
   "regex_features": [],
   "patterns": [],
   "utterances": [
     {
-      "text": "I'm taking",
+      "text": "5",
       "intent": "discussModule",
       "entities": []
     },
     {
-      "text": "I'm taking ethical computer hacking",
-      "intent": "discussModule",
+      "text": "anthony ventresque is my favourite lecturer",
+      "intent": "discussLecturer",
       "entities": [
-        {
-          "entity": "Module",
-          "startPos": 11,
-          "endPos": 24
-        }
-      ]
-    },
-    {
-      "text": "I'm taking connectionist computing",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Module",
-          "startPos": 11,
-          "endPos": 34
-        }
-      ]
-    },
-    {
-      "text": "book a hotel in new york",
-      "intent": "None",
-      "entities": []
-    },
-    {
-      "text": "book a restaurant",
-      "intent": "None",
-      "entities": []
-    },
-    {
-      "text": "I'm taking connectionist computing it is interesting",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Module",
-          "startPos": 11,
-          "endPos": 34
-        },
-        {
-          "entity": "Opinion",
-          "startPos": 41,
-          "endPos": 52
-        }
-      ]
-    },
-    {
-      "text": "I'm taking connectionist computing it is taught by Gianluca Pollastri",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Module",
-          "startPos": 1,
-          "endPos": 34
-        },
         {
           "entity": "Lecturer",
-          "startPos": 41,
-          "endPos": 57
-        }
-      ]
-    },
-    {
-      "text": "I'm taking human language technologies",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Module",
-          "startPos": 11,
-          "endPos": 38
-        }
-      ]
-    },
-    {
-      "text": "I'm feeling",
-      "intent": "discussFeeling",
-      "entities": []
-    },
-    {
-      "text": "I'm not feeling",
-      "intent": "discussFeeling",
-      "entities": []
-    },
-    {
-      "text": "I like",
-      "intent": "discussModule",
-      "entities": []
-    },
-    {
-      "text": "I like human language technologies",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Opinion",
-          "startPos": 2,
-          "endPos": 6
-        },
-        {
-          "entity": "Module",
-          "startPos": 7,
-          "endPos": 34
-        }
-      ]
-    },
-    {
-      "text": "I don't like comp47480",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Opinion",
-          "startPos": 2,
-          "endPos": 12
-        },
-        {
-          "entity": "Module",
-          "startPos": 13,
-          "endPos": 22
-        }
-      ]
-    },
-    {
-      "text": "I love COMP30110",
-      "intent": "discuss Module",
-      "entities": [
-        {
-          "entity": "Opinion",
-          "startPos": 2,
-          "endPos": 6
-        },
-        {
-          "entity": "Module",
-          "startPos": 7,
-          "endPos": 16
-        }
-      ]
-    },
-    {
-      "text": "I hate COMP30110",
-      "intent": "discussModule",
-      "entities": [
-        {
-          "entity": "Opinion",
-          "startPos": 2,
-          "endPos": 6
-        },
-        {
-          "entity": "Module",
-          "startPos": 7,
-          "endPos": 16
+          "startPos": 0,
+          "endPos": 17
         }
       ]
     },
@@ -299,11 +104,1469 @@
       "entities": []
     },
     {
+      "text": "bye bye",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "bye for now",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "bye makoto",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "chloe foxey",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 0,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "college is very stressful",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 0,
+          "endPos": 6
+        },
+        {
+          "entity": "Emotion",
+          "startPos": 16,
+          "endPos": 24
+        }
+      ]
+    },
+    {
+      "text": "david coyle is a very interesting lecturer",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 0,
+          "endPos": 10
+        },
+        {
+          "entity": "Opinion",
+          "startPos": 22,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "end chat",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "end conversation",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "ethical computer hacking is boring",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 0,
+          "endPos": 23
+        },
+        {
+          "entity": "Opinion",
+          "startPos": 28,
+          "endPos": 33
+        }
+      ]
+    },
+    {
+      "text": "ethical hacking is my favourite module",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 0,
+          "endPos": 14
+        },
+        {
+          "entity": "Opinion",
+          "startPos": 22,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "finished chat",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "finished conversation",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "get me directions from ucd to the city centre",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 23,
+          "endPos": 25
+        },
+        {
+          "entity": "Place",
+          "startPos": 34,
+          "endPos": 44
+        }
+      ]
+    },
+    {
+      "text": "get me the weather",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "get my timetable",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "get the weather",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "get weather",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "give me the weather for today in dublin",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "good afternoon",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "good evening",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "good morning",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
       "text": "goodbye",
       "intent": "endConversation",
       "entities": []
+    },
+    {
+      "text": "goodbye makoto",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "he",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hello makoto",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hello makoto, my name is sinead i'm in stage 4 computer science",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 25,
+          "endPos": 30
+        },
+        {
+          "entity": "Stage",
+          "startPos": 45,
+          "endPos": 45
+        }
+      ]
+    },
+    {
+      "text": "hello my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 17,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "hello! my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 18,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "hello, how are you?",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hello, my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 18,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "hey",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hey makoto",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hey, how are you?",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hi i'm sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 7,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "hi makoto",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hi makoto nice to meet you",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hi my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 14,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "hi! my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 15,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "hi, how are you?",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "hi, my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 15,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "hjdhd",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how long does it take to get from ucd to the city centre",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 34,
+          "endPos": 36
+        },
+        {
+          "entity": "Place",
+          "startPos": 45,
+          "endPos": 55
+        }
+      ]
+    },
+    {
+      "text": "how's it going?",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "human computer interaction makes me feel anxious",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 0,
+          "endPos": 25
+        },
+        {
+          "entity": "Emotion",
+          "startPos": 41,
+          "endPos": 47
+        }
+      ]
+    },
+    {
+      "text": "i am nervous for the exam",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 5,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "i am taking five modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 12,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "i am very stressed about ethical computer hacking",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 10,
+          "endPos": 17
+        },
+        {
+          "entity": "Module",
+          "startPos": 25,
+          "endPos": 48
+        }
+      ]
+    },
+    {
+      "text": "i buy lunch in the su",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 19,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "i don't have a lot of free time",
+      "intent": "discussExtracurricular",
+      "entities": []
+    },
+    {
+      "text": "i don't have much free time",
+      "intent": "discussExtracurricular",
+      "entities": []
+    },
+    {
+      "text": "i don't have time for hobbies",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 22,
+          "endPos": 28
+        }
+      ]
+    },
+    {
+      "text": "i don't like my modules this semester",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i eat in the su",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 13,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "i enjoy classes with anthony ventresque",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 21,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "i enjoy doing exams",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 2,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "i enjoy going to lectures from henry",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 2,
+          "endPos": 6
+        },
+        {
+          "entity": "Lecturer",
+          "startPos": 31,
+          "endPos": 35
+        }
+      ]
+    },
+    {
+      "text": "i enjoy two of my module",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "i get lunch in the student union",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 19,
+          "endPos": 31
+        }
+      ]
+    },
+    {
+      "text": "i go for coffee in pi",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 19,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "i go for lunch in poolside",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 18,
+          "endPos": 25
+        }
+      ]
+    },
+    {
+      "text": "i go to dance class",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 8,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "i go to health science library every evening",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 8,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "i go to james joyce library",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 8,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "i go to the classes in the sports centre",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 27,
+          "endPos": 39
+        }
+      ]
+    },
+    {
+      "text": "i go to the gym",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 12,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "i go to the gym in ucd",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 12,
+          "endPos": 14
+        },
+        {
+          "entity": "Place",
+          "startPos": 19,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "i go to the library sometimes",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 12,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "i have a lecture with mark scanlan today",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 22,
+          "endPos": 33
+        }
+      ]
+    },
+    {
+      "text": "i have mark scanlon for ethical computer hacking",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 7,
+          "endPos": 18
+        },
+        {
+          "entity": "Module",
+          "startPos": 24,
+          "endPos": 47
+        }
+      ]
+    },
+    {
+      "text": "i have one lecture in the o'brien",
+      "intent": "discussCampus",
+      "entities": []
+    },
+    {
+      "text": "i have six modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 7,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "i have three modules this semester",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "NumberOfModules",
+          "startPos": 7,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "i like the continuous assesment",
+      "intent": "discussFeeling",
+      "entities": []
+    },
+    {
+      "text": "i like to dance",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 10,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "i like to go to the sports centre",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 20,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "i like watching movies",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 7,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "i liked my modules better last semester",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i love ethical computer hacking",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 2,
+          "endPos": 5
+        },
+        {
+          "entity": "Module",
+          "startPos": 7,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "i love my course",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 2,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "i play music",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 7,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "i play sports",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 7,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "i play the piano",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 11,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "i prefer my modules this semester",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i read",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 2,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "i really like anthony ventresque as a lecturer",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 14,
+          "endPos": 31
+        }
+      ]
+    },
+    {
+      "text": "i relax in my free time",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 2,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "i sometimes go to the cinema",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 22,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "i use the gym twice a week",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 10,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "i use the library",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 10,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "i watch netflix",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 8,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "i work at the weekends",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 2,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "i workout",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 2,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "i'm a member of netsoc",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 16,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "i'm a member of the internet society",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 20,
+          "endPos": 35
+        }
+      ]
+    },
+    {
+      "text": "i'm doing three modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 10,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "i'm doing two modules this semester",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 10,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "i'm feeling nervous",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 12,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "i'm happy",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "i'm happy that there is a lot of continuous assessment",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "i'm nervous for the exam",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "i'm on the football team",
+      "intent": "discussExtracurricular",
+      "entities": [
+        {
+          "entity": "Extracurricular",
+          "startPos": 11,
+          "endPos": 18
+        },
+        {
+          "entity": "Extracurricular",
+          "startPos": 20,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "i'm studying computer science",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i'm studying ethical computer hacking",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 13,
+          "endPos": 36
+        }
+      ]
+    },
+    {
+      "text": "i'm studying hlt",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i'm studying human language technolgies",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i'm taking 4 modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 11,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "i'm taking 5 modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "NumberOfModules",
+          "startPos": 11,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "i'm taking comp30028",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "i'm taking comp6786",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "i'm taking connectionist computing it is interesting",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 33
+        },
+        {
+          "entity": "Opinion",
+          "startPos": 41,
+          "endPos": 51
+        }
+      ]
+    },
+    {
+      "text": "i'm taking connectionist computing it is taught by gianluca pollastri",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 33
+        },
+        {
+          "entity": "Lecturer",
+          "startPos": 51,
+          "endPos": 68
+        }
+      ]
+    },
+    {
+      "text": "i'm taking ethical computer hacking",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 34
+        }
+      ]
+    },
+    {
+      "text": "i'm taking ethical computer hacking, human language technologies, spatial information systems and connectionist computing",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 34
+        },
+        {
+          "entity": "Module",
+          "startPos": 37,
+          "endPos": 63
+        },
+        {
+          "entity": "Module",
+          "startPos": 66,
+          "endPos": 92
+        },
+        {
+          "entity": "Module",
+          "startPos": 98,
+          "endPos": 120
+        }
+      ]
+    },
+    {
+      "text": "i'm taking four modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "NumberOfModules",
+          "startPos": 11,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "i'm taking human language technologies",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 11,
+          "endPos": 37
+        }
+      ]
+    },
+    {
+      "text": "i'm unhappy with my modules",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "i'm very happy in ucd",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 9,
+          "endPos": 13
+        },
+        {
+          "entity": "Place",
+          "startPos": 18,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "i'm very upset about my grades",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Emotion",
+          "startPos": 9,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "it is hard to listen to some lectures",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "it's nice to meet you",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "its very easy to listen to the lecturers",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 9,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "i've got to go",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "jhcghj",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "jhfdkjhs",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "julie berndsen teaches human language technologies",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 0,
+          "endPos": 13
+        },
+        {
+          "entity": "Module",
+          "startPos": 23,
+          "endPos": 49
+        }
+      ]
+    },
+    {
+      "text": "leave chat",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "lecturer",
+      "intent": "discussLecturer",
+      "entities": []
+    },
+    {
+      "text": "mark scanlan's lectures are very interesting",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 0,
+          "endPos": 11
+        },
+        {
+          "entity": "Opinion",
+          "startPos": 33,
+          "endPos": 43
+        }
+      ]
+    },
+    {
+      "text": "modules",
+      "intent": "discussModule",
+      "entities": []
+    },
+    {
+      "text": "most of my modules take place in the computer science building",
+      "intent": "discussCampus",
+      "entities": [
+        {
+          "entity": "Place",
+          "startPos": 37,
+          "endPos": 61
+        }
+      ]
+    },
+    {
+      "text": "my favourite modules are with the lecturer anthony ventresque",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 43,
+          "endPos": 60
+        }
+      ]
+    },
+    {
+      "text": "my lecturers are juile, mark, gianluca and anh",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Lecturer",
+          "startPos": 17,
+          "endPos": 21
+        },
+        {
+          "entity": "Lecturer",
+          "startPos": 24,
+          "endPos": 27
+        },
+        {
+          "entity": "Lecturer",
+          "startPos": 30,
+          "endPos": 37
+        },
+        {
+          "entity": "Lecturer",
+          "startPos": 43,
+          "endPos": 45
+        }
+      ]
+    },
+    {
+      "text": "my name is niamh",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 11,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "my name is sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 11,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "my name is sinead farrell",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 11,
+          "endPos": 16
+        }
+      ]
+    },
+    {
+      "text": "nice talking to you makoto",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "pleased to meet you",
+      "intent": "greeting",
+      "entities": []
+    },
+    {
+      "text": "show me my timetable",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "sinead",
+      "intent": "greeting",
+      "entities": [
+        {
+          "entity": "UserName",
+          "startPos": 0,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "stop chat",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "thank you for talking to me",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "thanks for the chat",
+      "intent": "endConversation",
+      "entities": []
+    },
+    {
+      "text": "the assignments in hci make me very stressed",
+      "intent": "discussFeeling",
+      "entities": [
+        {
+          "entity": "Module",
+          "startPos": 19,
+          "endPos": 21
+        },
+        {
+          "entity": "Emotion",
+          "startPos": 36,
+          "endPos": 43
+        }
+      ]
+    },
+    {
+      "text": "the lecturers are very good",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 23,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "the lectures can be very hard to follow",
+      "intent": "discussLecturer",
+      "entities": [
+        {
+          "entity": "Opinion",
+          "startPos": 25,
+          "endPos": 28
+        }
+      ]
+    },
+    {
+      "text": "this semester i have four modules",
+      "intent": "discussModule",
+      "entities": [
+        {
+          "entity": "Number",
+          "startPos": 21,
+          "endPos": 24
+        }
+      ]
+    },
+    {
+      "text": "weather",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is my timetable like",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is the score of the match",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is the weather like in dublin",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is the weather like today",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what's up?",
+      "intent": "greeting",
+      "entities": []
     }
-
   ],
   "settings": []
 }

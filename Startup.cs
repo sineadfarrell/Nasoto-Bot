@@ -17,6 +17,7 @@ namespace Microsoft.BotBuilderSamples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Create the Bot Framework Adapter with error handling enabled.
@@ -45,7 +46,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddSingleton<MainDialog>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, DialogBot<TopLevelDialog>>();
+            services.AddTransient<IBot, DialogBot<MainDialog>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
