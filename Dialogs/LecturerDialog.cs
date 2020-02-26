@@ -61,13 +61,15 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
           var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
-            
+            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
+                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);;    
+           }
             var moduleDetails = new ModuleDetails(){
                 Lecturer = luisResult.Entities.Lecturer,
                 Opinion = luisResult.Entities.Opinion,
             };
             
-            var messageText = $"I've heard it very interesting, do you have a final exam?";
+            var messageText = $"I wouldn't be intrested in that topic myself, do you have a final exam?";
             var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
             return await stepContext.NextAsync(null, cancellationToken);
         }

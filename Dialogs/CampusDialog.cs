@@ -15,13 +15,15 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         protected readonly ILogger Logger;
         
         
-        public CampusDialog(ConversationRecognizer luisRecognizer,  ILogger<CampusDialog> logger)
+        public CampusDialog(ConversationRecognizer luisRecognizer,  ILogger<CampusDialog> logger, EndConversationDialog endConversation, ExtracurricularDialog extracurricularDialog)
             : base(nameof(CampusDialog))
 
         {   
             _luisRecognizer = luisRecognizer;
             Logger = logger;
             AddDialog(new TextPrompt(nameof(TextPrompt)));
+            AddDialog(extracurricularDialog);
+            AddDialog(endConversation);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 IntroStepAsync,
@@ -44,7 +46,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = $"What do you think of the ucd campus?";
+            var messageText = $"I really like the campus here, What do you think of it?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
@@ -61,12 +63,16 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             
-            if(luisResult.Text.Equals("yes")){
-                return await stepContext.EndDialogAsync(null, cancellationToken);
+            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
+                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);
             }
-            
-            
-            return await stepContext.EndDialogAsync(null, cancellationToken);
+            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussFeeling)){
+                 return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
+            }
+            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussExtracurricular)){
+                return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
+            }
+            return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
         }
 
 
