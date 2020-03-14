@@ -37,7 +37,9 @@ namespace Microsoft.BotBuilderSamples.Bots
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             
-            await turnContext.SendActivityAsync("My name is Nasoto. Enter anything to start our conversation.");
+            await turnContext.SendActivityAsync("My name is Nasoto. We will talk about university today.");
+            await turnContext.SendActivityAsync("To end the conversation at anytime say 'bye' or 'end conversation'");
+            await turnContext.SendActivityAsync("Enter anything to start our conversation.");
         }
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))

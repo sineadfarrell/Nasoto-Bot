@@ -15,22 +15,21 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         protected readonly ILogger Logger;
         
         
-        public CampusDialog(ConversationRecognizer luisRecognizer,  ILogger<CampusDialog> logger, EndConversationDialog endConversation, ExtracurricularDialog extracurricularDialog)
+        public CampusDialog(ConversationRecognizer luisRecognizer, ILogger<CampusDialog> logger)
             : base(nameof(CampusDialog))
 
         {   
             _luisRecognizer = luisRecognizer;
             Logger = logger;
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(extracurricularDialog);
-            AddDialog(endConversation);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 IntroStepAsync,
-                EndStepAsync,
-                
+                FacStepAsync,
+                CoronaStepAsync,
+                CoronaResponseStepAsync,
+                CoronaMoveStepAsync,
             }));
-
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
@@ -40,18 +39,18 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+                MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.NextAsync(null, cancellationToken);
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = $"I really like the campus here, What do you think of it?";
+            var messageText = $"What do you think of the facilities on campus?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
 
-        private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> FacStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
             {
@@ -63,18 +62,79 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             
-            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
-                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);
+            
+            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
+                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
+                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
             }
-            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussFeeling)){
-                 return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
-            }
-            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussExtracurricular)){
-                return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
-            }
-            return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
+            var messageText = $"Do you use the facilities that are available often?";
+            var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
         }
 
+          private async Task<DialogTurnResult> CoronaStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            if (!_luisRecognizer.IsConfigured)
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
+            }
+
+           var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+             if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
+                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
+                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
+            }
+            var messageText = $"How has the corona virus affected your university experience and use of these facilities?";
+            var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
+
+        }
+
+         private async Task<DialogTurnResult> CoronaResponseStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            if (!_luisRecognizer.IsConfigured)
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
+            }
+
+           var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+             if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
+                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
+                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
+            }
+            var messageText = $"That's very interesting! Would you like to talk more about the effect of the Corona Virus on your university experience?";
+            var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
+
+        }
+
+         private async Task<DialogTurnResult> CoronaMoveStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+           if (!_luisRecognizer.IsConfigured)
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
+            }
+            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
+            if (luisResult.Text.Equals("no"))
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("It was great talking to you! Enjoy the rest of your day!", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            return await stepContext.BeginDialogAsync(nameof(CoronaDialog));
+
+        }
 
        
     }

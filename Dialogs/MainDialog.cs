@@ -20,22 +20,20 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         protected readonly ILogger Logger;
 
         // Dependency injection uses this constructor to instantiate MainDialog
-        public MainDialog(ConversationRecognizer luisRecognizer,  ExtracurricularDialog extracurricularDialog, UserProfileDialog userProfileDialog, ModuleDialog moduleDialog, EndConversationDialog endConversation, CampusDialog campusDialog, LecturerDialog lecturerDialog, ILogger<MainDialog> logger)
+        public MainDialog(ConversationRecognizer luisRecognizer, ExtracurricularDialog extracurricularDialog, CampusDialog campusDialog,  ILogger<MainDialog> logger)
             : base(nameof(MainDialog))
         {
             _luisRecognizer = luisRecognizer;
             Logger = logger;
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(userProfileDialog);
-            AddDialog(moduleDialog);
-            AddDialog(endConversation);
-            AddDialog(lecturerDialog);
+            
+    
             AddDialog(campusDialog);
             AddDialog(extracurricularDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                IntroStepAsync,
+                NameStepAsync,
                 ActStepAsync,
                 FinalStepAsync,
             }));
@@ -44,24 +42,13 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-
-        private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+    private static async Task<DialogTurnResult> NameStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            if (!_luisRecognizer.IsConfigured)
-            {
-                await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
-                return await stepContext.NextAsync(null, cancellationToken);
+            return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("So what would you like to talk about? For example we can talk about extracurricular activities or UCD campus?")}, cancellationToken);
             }
-
-            // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = stepContext.Options?.ToString() ?? "What aspect of university would you like to talk about?";
-            var promptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
-            return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = promptMessage }, cancellationToken);
-        }
-
-        public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext,  CancellationToken cancellationToken)
+       
+        public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
             {
@@ -72,78 +59,44 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             switch (luisResult.TopIntent().intent)
             {
-                case Luis.Conversation.Intent.greeting:
-
-                    // Initialize UsesrEntities with any entities we may have found in the response.
-                    var userInfo = new UserProfile()
-                    {
-                        Name = luisResult.Entities.UserName,
-                    };
-
-                    if (userInfo.Name == null)
-                    {
-                        return await stepContext.BeginDialogAsync(nameof(UserProfileDialog), userInfo, cancellationToken);
-                    }
-                    return await stepContext.BeginDialogAsync(nameof(ModuleDialog), userInfo, cancellationToken);
-
-                case Luis.Conversation.Intent.discussModule:
-
-                    var moduleInfo = new ModuleDetails()
-                    {
-                        ModuleName = luisResult.Entities.Module,
-                        Opinion = luisResult.Entities.Opinion,
-                        Lecturer = luisResult.Entities.Lecturer,
-                        Emotion = luisResult.Entities.Emotion,
-
-                    };
-
-                    return await stepContext.BeginDialogAsync(nameof(ModuleDialog), moduleInfo, cancellationToken);
-
-
-                case Luis.Conversation.Intent.discussLecturer:
-                     var moduleInfoLec = new ModuleDetails()
-                    {
-                        ModuleName = luisResult.Entities.Module,
-                        Opinion = luisResult.Entities.Opinion,
-                        Lecturer = luisResult.Entities.Lecturer,
-                        Emotion = luisResult.Entities.Emotion,
-
-                    };
-
-                    return await stepContext.BeginDialogAsync(nameof(LecturerDialog), moduleInfoLec, cancellationToken);
-
-
-                // case Luis.Conversation.Intent.discussFeeling:
-                //     // We haven't implemented the GetWeatherDialog so we just display a TODO message.
-                //     var getFeelingMessageText = "TODO: get Feeling flow here";
-                //     var getFeelingMessage = MessageFactory.Text(getFeelingMessageText, getFeelingMessageText, InputHints.IgnoringInput);
-                //     await stepContext.Context.SendActivityAsync(getFeelingMessage, cancellationToken);
-                //     break;
-
-                case Luis.Conversation.Intent.discussExtracurricular:
-                    return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
-
                 case Luis.Conversation.Intent.discussCampus:
-                    return await stepContext.BeginDialogAsync(nameof(CampusDialog), cancellationToken);
+                    var moduleInfoCampus = new ModuleDetails()
+                    {
+                        ModuleName = luisResult.Entities.Module,
+                        Opinion = luisResult.Entities.Opinion,
+                        Lecturer = luisResult.Entities.Lecturer,
+                        Emotion = luisResult.Entities.Emotion
+                    };
+                    return await stepContext.BeginDialogAsync(nameof(CampusDialog), moduleInfoCampus, cancellationToken);
+                
+                case Luis.Conversation.Intent.discussExtracurricular:
 
-                case Luis.Conversation.Intent.endConversation:
-
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);
+                    var moduleInfoExtra = new ModuleDetails()
+                    {
+                        ModuleName = luisResult.Entities.Module,
+                        Opinion = luisResult.Entities.Opinion,
+                        Lecturer = luisResult.Entities.Lecturer,
+                        Emotion = luisResult.Entities.Emotion
+                    };
+                    return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), moduleInfoExtra, cancellationToken);
 
                 case Luis.Conversation.Intent.None:
-                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
-                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
-                  return await stepContext.NextAsync(null, cancellationToken);
+                    var didntUnderstandMessageText2 = $"Sorry, it is not in my capacity to talk about that. Let's try again!";
+                    var didntUnderstandMessage2 = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.IgnoringInput);
+                    await stepContext.Context.SendActivityAsync(didntUnderstandMessage2, cancellationToken);
+                   
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog));
 
                 default:
                     // Catch all for unhandled intents
-                    var didntUnderstandMessageText2 = $"Sorry, I didn't get that. Please try rephrasing your message!";
-                    var didntUnderstandMessage2 = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.IgnoringInput);
-                    await stepContext.Context.SendActivityAsync(didntUnderstandMessage2, cancellationToken);
-                    break;
+                    var didntUnderstandMessageText3 = $"Sorry, it is not in my capacity to talk about that. Let's try again!";
+                    var didntUnderstandMessage3 = MessageFactory.Text(didntUnderstandMessageText3, didntUnderstandMessageText3, InputHints.IgnoringInput);
+                    await stepContext.Context.SendActivityAsync(didntUnderstandMessage3, cancellationToken);
+                    return await stepContext.ReplaceDialogAsync(nameof(MainDialog));
+                   
 
             }
-            return await stepContext.NextAsync(null, cancellationToken);
+           
 
         }
 
