@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot-src/CoreBot.csproj": {}
+    "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj": {}
   },
   "projects": {
-    "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot-src/CoreBot.csproj": {
+    "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot-src/CoreBot.csproj",
+        "projectUniqueName": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj",
         "projectName": "CoreBot",
-        "projectPath": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot-src/CoreBot.csproj",
+        "projectPath": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj",
         "packagesPath": "/Users/sineadfarrell/.nuget/packages/",
-        "outputPath": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot-src/obj/",
+        "outputPath": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -48,6 +48,10 @@
             "Microsoft.Bot.Builder.AI.Luis": {
               "target": "Package",
               "version": "[4.6.3, )"
+            },
+            "Microsoft.Bot.Builder.Azure": {
+              "target": "Package",
+              "version": "[4.7.2, )"
             },
             "Microsoft.Bot.Builder.Dialogs": {
               "target": "Package",
