@@ -6,9 +6,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using System;
-using System.Collections.Generic;
-using Microsoft.Bot.Builder.Dialogs.Choices;
+
 
 
 namespace Microsoft.BotBuilderSamples.Dialogs
@@ -62,12 +60,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             if (!string.IsNullOrEmpty(userDetails.Activity.First()))
             {
-                messageText = $"Great idea! Are you a part of a team or a club for {userDetails.Activity.FirstOrDefault()}?";
+                messageText = $"We will dicuss extracurricular activities. Are you a part of a team or a club for {userDetails.Activity.FirstOrDefault()}?";
                 elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
             else
             {
-                 messageText = $"Great! So what kinda things do you like doing in your spare time on campus?";
+                 messageText = $"We will dicuss extracurricular activities. How do you spend your free time on campus?";
                 elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
 
@@ -100,7 +98,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussExtracurricular))
             {
-                var messageText = $"Wow that's great!";
+                var messageText = $"Ok. Should we discuss more on the topic of university?";
                 var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                 await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
             }
@@ -109,7 +107,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
             }
 
-            var messageText2 = $"Is there anything else you'd like to talk about?";
+            var messageText2 = $"Should we discuss more on the topic of university?";
             var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(messageText2, messageText2, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
         }
@@ -128,7 +126,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             if (luisResult.Text.Equals("no"))
             {
                 await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("It was great talking to you! Enjoy the rest of your day!", inputHint: InputHints.IgnoringInput), cancellationToken);
+                    MessageFactory.Text("Goodbye", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }

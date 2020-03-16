@@ -43,7 +43,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = $"How do you feel about the closure of UCD because of the virus?";
+            var messageText = $"In general what are your thoughts about the closure of UCD because of COVID-19?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
@@ -57,7 +57,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                 return await stepContext.NextAsync(null, cancellationToken);
             }
-            var messageText = $"On that note I think we have come to the end of our conversation.";
+            var messageText = $"That's all we can talk about today.";
           
             await stepContext.Context.SendActivityAsync( MessageFactory.Text(messageText, inputHint: InputHints.IgnoringInput), cancellationToken);
             return await stepContext.NextAsync();
@@ -68,7 +68,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         {
            
                 await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("It was great talking to you! Enjoy the rest of your day!", inputHint: InputHints.IgnoringInput), cancellationToken);
+                    MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             

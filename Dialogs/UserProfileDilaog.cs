@@ -51,7 +51,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = stepContext.Options?.ToString() ?? "Brilliant! Let's start off with getting to know you, what is your name?";
+            var messageText = stepContext.Options?.ToString() ?? "What is your name?";
             var promptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
             return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = promptMessage }, cancellationToken);
         }
@@ -68,7 +68,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             
 
             if(string.IsNullOrEmpty(userInfo.Name.FirstOrDefault())){
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Thanks, it's great to meet you!"), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok we will now begin."), cancellationToken);
 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));    
                  }
@@ -83,7 +83,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);;    
                 }
                 
-                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Thanks {userInfo.Name.FirstOrDefault()}, it's great to meet you!"), cancellationToken);
+                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok {userInfo.Name.FirstOrDefault()} we will now begin."), cancellationToken);
 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));   
             }

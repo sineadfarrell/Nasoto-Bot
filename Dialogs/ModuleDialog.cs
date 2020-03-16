@@ -67,7 +67,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = $"Excellent lets's talk about your modules. \n How many modules are you taking this trimester?";
+            var messageText = $"We will discuss your modules now. \n How many modules are you taking this trimester?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
@@ -97,13 +97,13 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
             case Luis.Conversation.Intent.discussModule:
            
-            var messageText = $"Wow {moduleDetails.NumberOfModules.FirstOrDefault()} modules! Which one would you say is your favourite?";
+            var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
             default:
                     // Catch all for unhandled intents
-                var didntUnderstandMessageText2 = $"Sorry, I didn't get that. Please try rephrasing your message!";
+                var didntUnderstandMessageText2 = $"I didn't get that. Please try rephrasing your message!";
                  var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.ExpectingInput) };
                  await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
             
@@ -149,11 +149,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
 
             if(string.IsNullOrWhiteSpace(moduleDetails.ModuleName.FirstOrDefault())){
-             messageText = $"Oh no! I don't think I know that module. Is there much continous assesment for the module or is there an exam?";
+             messageText = $"I haven't heard of that module. How is the module broken up in terms of continuous assesment and a final exam?";
              elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
             else{
-             messageText = $"Ah very good! I've heard it's a very interesting module, Is there much continous assesment for {moduleDetails.ModuleName.FirstOrDefault()} or is there an exam?";
+             messageText = $"Is there much continuous assesment for {moduleDetails.ModuleName.FirstOrDefault()} or is there an exam?";
              elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
 
@@ -183,9 +183,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
             }
 
-          
-              
-            var messageText = $"Ok! Why do you like the module?";
+            var messageText = $"Ok and why do you like the module?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
           
@@ -213,7 +211,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
           
            
-            var messageText2 = $"Ok! Why don't you like it?";
+            var messageText2 = $"What are the reasons for disliking this module?";
             var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(messageText2, messageText2, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
         }
@@ -242,7 +240,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(LecturerDialog), cancellationToken); ;
             }
 
-            var messageText2 = $"That's great! What would you say is your least favourite module?";
+            var messageText2 = $"Presumably you have a least favourite. What would you say is your least favourite module?";
             var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(messageText2, messageText2, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
 
@@ -286,11 +284,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
 
             if(string.IsNullOrWhiteSpace(moduleDetails.ModuleName.FirstOrDefault())){
-             messageText = $"Oh no! I don't think I know that module. Is there much continuous assesment for the module or is there an exam?";
+             messageText = $"Oh no! I don't think I know that module. How is the module broken up in terms of continuous assesment and a final exam?";
              elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
             else{
-             messageText = $"Oh it's a pity you don't like {moduleDetails.ModuleName.FirstOrDefault()}.  Is there much continuous assesment for {moduleDetails.ModuleName.FirstOrDefault()} or is there an exam?";
+             messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either.  Is there much continuous assesment for {moduleDetails.ModuleName.FirstOrDefault()} or is there a final exam?";
              elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
 
@@ -320,7 +318,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
             }
 
-            var messageText = $"Oh no that's awful! Why don't we talk about your lecturers.";
+            var messageText = $"Now we are going to talk about your lecturers.";
             var Message = MessageFactory.Text(messageText,messageText, InputHints.IgnoringInput);
             await stepContext.Context.SendActivityAsync(Message, cancellationToken);
             return await stepContext.BeginDialogAsync(nameof(LecturerDialog));

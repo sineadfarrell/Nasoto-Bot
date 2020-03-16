@@ -43,7 +43,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = $"Are you sure you want to end our conversation?";
+            var messageText = $"Do you want to end this conversation?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
@@ -62,12 +62,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             
             if(luisResult.Text.Equals("yes")){
                await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("It was great talking to you! Enjoy the rest of your day!", inputHint: InputHints.IgnoringInput), cancellationToken);
+                    MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             
-            var messageText = $"Great! Let's continue our conversation.";
+            var messageText = $"Ok the conversation will continue.";
             var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
            return await stepContext.BeginDialogAsync(nameof(MainDialog));
         }

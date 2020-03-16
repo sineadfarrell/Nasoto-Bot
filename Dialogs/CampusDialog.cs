@@ -45,7 +45,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
-            var messageText = $"What do you think of the facilities on campus?";
+            var messageText = $"What do you think of the many campus failities, like the gym, cinema, library etc.?";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
@@ -67,7 +67,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
                     var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
             }
-            var messageText = $"Do you use the facilities that are available often?";
+            var messageText = $"In gerneral would you use the facilities that are available often?";
             var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
         }
@@ -87,7 +87,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
                     var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
             }
-            var messageText = $"How has the corona virus affected your university experience and use of these facilities?";
+            var messageText = $"Presumably the corona virus has affected your university experience and the general use of these facilities, how has it impacted you?";
             var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
 
@@ -108,7 +108,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
                     var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
             }
-            var messageText = $"That's very interesting! Would you like to talk more about the effect of the Corona Virus on your university experience?";
+            var messageText = $"Would you like to talk more about the effect of the Corona Virus on your university experience?";
             var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
 
@@ -128,7 +128,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             if (luisResult.Text.Equals("no"))
             {
                 await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("It was great talking to you! Enjoy the rest of your day!", inputHint: InputHints.IgnoringInput), cancellationToken);
+                    MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
