@@ -35,6 +35,12 @@ namespace Microsoft.BotBuilderSamples
             // Register LUIS recognizer
             services.AddSingleton<ConversationRecognizer>();
 
+            services.AddSingleton<EndConversationDialog>();
+            services.AddSingleton<CoronaDialog>();
+            services.AddSingleton<LecturerDialog>();
+            services.AddSingleton<CampusDialog>();
+            services.AddSingleton<ExtracurricularDialog>();
+            
             // Discuss a module.
             services.AddSingleton<ModuleDialog>();
 
