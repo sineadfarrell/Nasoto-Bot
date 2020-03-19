@@ -49,6 +49,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                 return await stepContext.NextAsync(null, cancellationToken);
             }
+            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+            if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
+            {
+                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
+            }
+
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
             var messageText = stepContext.Options?.ToString() ?? "What is your name?";
@@ -65,20 +71,22 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     {
                         Name = luisResult.Entities.UserName,
                     };
-            
+            if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.None))
+            {
+                var didntUnderstandMessageText2 = $"I didn't understand that. Could you please rephrase";
+                 var elsePromptMessage2 =  new PromptOptions {Prompt = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.ExpectingInput)};
+                 
+                 stepContext.ActiveDialog.State[key: "stepIndex"] =  0; 
+                 return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
+            }
 
-            if(string.IsNullOrEmpty(userInfo.Name.FirstOrDefault())){
+            if (userInfo.Name == null)
+            {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok we will now begin."), cancellationToken);
 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));    
                  }
 
-            if((userInfo.Name.FirstOrDefault()).Equals("")){
-                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
-                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
-                     await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = didntUnderstandMessage }, cancellationToken);
-                    return await stepContext.ReplaceDialogAsync(nameof(UserProfileDialog));
-            }
             if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
             return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);;    
                 }

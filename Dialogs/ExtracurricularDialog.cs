@@ -58,16 +58,10 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var messageText = $"";
             var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
 
-            if (!string.IsNullOrEmpty(userDetails.Activity.First()))
-            {
-                messageText = $"We will dicuss extracurricular activities. Are you a part of a team or a club for {userDetails.Activity.FirstOrDefault()}?";
-                elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
-            }
-            else
-            {
+            
                  messageText = $"We will dicuss extracurricular activities. How do you spend your free time on campus?";
                 elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
-            }
+            
 
 
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
@@ -103,8 +97,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
             }
              if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
-                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
-                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
+                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
+                    var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
+
+                    stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
+                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
             }
 
             var messageText2 = $"Should we discuss more on the topic of university?";

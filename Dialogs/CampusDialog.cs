@@ -64,8 +64,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             
             
             if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
-                    var didntUnderstandMessageText = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
-                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
+                var didntUnderstandMessageText2 = $"I didn't understand that. Could you please rephrase";
+                 var elsePromptMessage2 =  new PromptOptions {Prompt = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.ExpectingInput)};
+                 
+                 stepContext.ActiveDialog.State[key: "stepIndex"] =  0; 
+                 return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
             }
             var messageText = $"In gerneral would you use the facilities that are available often?";
             var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
