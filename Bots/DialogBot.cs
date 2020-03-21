@@ -70,78 +70,78 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-//              // preserve user input.
-//             var utterance = turnContext.Activity.Text;
-//             // make empty local logitems list.
-//             UtteranceLog logItems = null;
+             // preserve user input.
+            var utterance = turnContext.Activity.Text;
+            // make empty local logitems list.
+            UtteranceLog logItems = null;
 
-//             // see if there are previous messages saved in storage.
-//             try
-//             {
-//                 string[] utteranceList = { "UtteranceLog" };
-//                 logItems = _myStorage.ReadAsync<UtteranceLog>(utteranceList).Result?.FirstOrDefault().Value;
-//             }
-//             catch
-//             {
-//                 // Inform the user an error occured.
-//                 await turnContext.SendActivityAsync("Sorry, something went wrong reading your stored messages!");
-//             }
-//          // If no stored messages were found, create and store a new entry.
-//       if (logItems is null)
-//       {
-//          // add the current utterance to a new object.
-//          logItems = new UtteranceLog();
-//          logItems.UtteranceList.Add(utterance);
-//          // set initial turn counter to 1.
-//          logItems.TurnNumber++;
+            // see if there are previous messages saved in storage.
+            try
+            {
+                string[] utteranceList = { "UtteranceLog" };
+                logItems = _myStorage.ReadAsync<UtteranceLog>(utteranceList).Result?.FirstOrDefault().Value;
+            }
+            catch
+            {
+                // Inform the user an error occured.
+                await turnContext.SendActivityAsync("Sorry, something went wrong reading your stored messages!");
+            }
+         // If no stored messages were found, create and store a new entry.
+      if (logItems is null)
+      {
+         // add the current utterance to a new object.
+         logItems = new UtteranceLog();
+         logItems.UtteranceList.Add(utterance);
+         // set initial turn counter to 1.
+         logItems.TurnNumber++;
 
-//          // Show user new user message.
-//         //  await turnContext.SendActivityAsync($"{logItems.TurnNumber}: The list is now: {string.Join(", ", logItems.UtteranceList)}");
+         // Show user new user message.
+        //  await turnContext.SendActivityAsync($"{logItems.TurnNumber}: The list is now: {string.Join(", ", logItems.UtteranceList)}");
 
-//          // Create Dictionary object to hold received user messages.
-//          var changes = new Dictionary<string, object>();
-//          {
-//             changes.Add("UtteranceLog", logItems);
-//          }
-//          try
-//          {
-//             // Save the user message to your Storage.
-//             await _myStorage.WriteAsync(changes, cancellationToken);
-//          }
-//          catch
-//          {
-//             // Inform the user an error occured.
-//             await turnContext.SendActivityAsync("Sorry, something went wrong storing your message!");
-//          }
-//       }
-//       // Else, our Storage already contained saved user messages, add new one to the list.
-//       else
-//       {
-//          // add new message to list of messages to display.
-//          logItems.UtteranceList.Add(utterance);
-//          // increment turn counter.
-//          logItems.TurnNumber++;
+         // Create Dictionary object to hold received user messages.
+         var changes = new Dictionary<string, object>();
+         {
+            changes.Add("UtteranceLog", logItems);
+         }
+         try
+         {
+            // Save the user message to your Storage.
+            await _myStorage.WriteAsync(changes, cancellationToken);
+         }
+         catch
+         {
+            // Inform the user an error occured.
+            await turnContext.SendActivityAsync("Sorry, something went wrong storing your message!");
+         }
+      }
+      // Else, our Storage already contained saved user messages, add new one to the list.
+      else
+      {
+         // add new message to list of messages to display.
+         logItems.UtteranceList.Add(utterance);
+         // increment turn counter.
+         logItems.TurnNumber++;
          
-//          // show user new list of saved messages.
-//         //  await turnContext.SendActivityAsync($"{logItems.TurnNumber}: The list is now: {string.Join(", ", logItems.UtteranceList)}");
+         // show user new list of saved messages.
+        //  await turnContext.SendActivityAsync($"{logItems.TurnNumber}: The list is now: {string.Join(", ", logItems.UtteranceList)}");
 
-//         // Create Dictionary object to hold new list of messages.
-//         var changes = new Dictionary<string, object>();
-//          {
-//             changes.Add("UtteranceLog", logItems);
-//          };
+        // Create Dictionary object to hold new list of messages.
+        var changes = new Dictionary<string, object>();
+         {
+            changes.Add("UtteranceLog", logItems);
+         };
          
-//          try
-//          {
-//             // Save new list to your Storage.
-//             await _myStorage.WriteAsync(changes, cancellationToken);
-// }
-//          catch
-//          {
-//             // Inform the user an error occured.
-//             await turnContext.SendActivityAsync("Sorry, something went wrong storing your message!");
-//          }
-//       }
+         try
+         {
+            // Save new list to your Storage.
+            await _myStorage.WriteAsync(changes, cancellationToken);
+}
+         catch
+         {
+            // Inform the user an error occured.
+            await turnContext.SendActivityAsync("Sorry, something went wrong storing your message!");
+         }
+      }
        await _myTranscripts.LogActivityAsync(turnContext.Activity);
 
     List<string> storedTranscripts = new List<string>();
