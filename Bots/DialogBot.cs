@@ -22,7 +22,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         where T : Dialog
     {
          private static readonly AzureBlobStorage _myStorage = new AzureBlobStorage("DefaultEndpointsProtocol=https;AccountName=makotopilot;AccountKey=sz9BpcayrqYeS5T/opq8UBn6pb/l2B6ypjUuunDwGFDY/Pr2wbGhBFffbkjkrXd60vceNaI3906lSZEq5Lezdg==;EndpointSuffix=core.windows.net", "nasoto-pilot");
-        private readonly AzureBlobTranscriptStore _myTranscripts = new AzureBlobTranscriptStore("DefaultEndpointsProtocol=https;AccountName=makotopilot;AccountKey=sz9BpcayrqYeS5T/opq8UBn6pb/l2B6ypjUuunDwGFDY/Pr2wbGhBFffbkjkrXd60vceNaI3906lSZEq5Lezdg==;EndpointSuffix=core.windows.net", "makoto-pilot");
+        private readonly AzureBlobTranscriptStore _myTranscripts = new AzureBlobTranscriptStore("DefaultEndpointsProtocol=https;AccountName=makotopilot;AccountKey=sz9BpcayrqYeS5T/opq8UBn6pb/l2B6ypjUuunDwGFDY/Pr2wbGhBFffbkjkrXd60vceNaI3906lSZEq5Lezdg==;EndpointSuffix=core.windows.net", "nasoto-pilot");
 
         // Create cancellation token (used by Async Write operation).
         public CancellationToken cancellationToken { get; private set; }
