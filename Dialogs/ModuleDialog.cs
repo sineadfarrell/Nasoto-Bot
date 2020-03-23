@@ -140,7 +140,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
 
 
-                    messageText = $"Is there much continuous assesment for {moduleDetails.ModuleName.FirstOrDefault()} or is there an exam?";
+                    messageText = $"Is there a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
                     elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
@@ -322,7 +322,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
              elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
             else{
-             messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either.  Is there much continuous assesment for {moduleDetails.ModuleName.FirstOrDefault()} or is there a final exam?";
+             messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either.  Is a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
              elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             }
 
