@@ -51,13 +51,13 @@ namespace Microsoft.BotBuilderSamples.Bots
             public string ETag { get; set; } = "*";
         }
 
-        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
+      //   protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+      //   {
             
-            await turnContext.SendActivityAsync("My name is Nasoto. We are going to talk about university today.");
-            await turnContext.SendActivityAsync("To end the conversation at anytime say 'bye' or 'end conversation'");
-            await turnContext.SendActivityAsync("Enter anything to start our conversation.");
-        }
+      //       await turnContext.SendActivityAsync("My name is Nasoto. We are going to talk about university today.");
+      //       await turnContext.SendActivityAsync("To end the conversation at anytime say 'bye' or 'end conversation'");
+      //       await turnContext.SendActivityAsync("Enter anything to start our conversation.");
+      //   }
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
