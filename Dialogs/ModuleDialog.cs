@@ -98,7 +98,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.discussModule: 
-                if(moduleDetails.NumberOfModules.Length > 0) {              
+                if(moduleDetails.NumberOfModules != null) {              
                     if (int.TryParse(moduleDetails.NumberOfModules.FirstOrDefault(), out i))
                     {
                         var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
