@@ -6,6 +6,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
+using System.Collections.Generic;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
