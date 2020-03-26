@@ -170,18 +170,26 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var messageText = " ";
                     var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
 
-
+                    if(moduleDetails.ModuleName != null){
                     messageText = $"Is there a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
                     elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
-                case Luis.Conversation.Intent.None:
-                    {
-                        var didntUnderstandMessageText = $"Sorry, I didn't understand that. Could you please rephrase";
+                    }
+                    var didntUnderstandMessageText = $"Sorry, I didn't understand that. Could you please rephrase";
                         var elsePromptMessageNone = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
 
                         stepContext.ActiveDialog.State[key: "stepIndex"] = 1;
                         return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessageNone, cancellationToken);
+                    
+
+                case Luis.Conversation.Intent.None:
+                    {
+                        var didntUnderstandMessageText3 = $"Sorry, I didn't understand that. Could you please rephrase";
+                        var elsePromptMessageNone3 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText3, didntUnderstandMessageText3, InputHints.ExpectingInput) };
+
+                        stepContext.ActiveDialog.State[key: "stepIndex"] = 1;
+                        return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessageNone3, cancellationToken);
                     }
 
                 default:
@@ -363,7 +371,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var messageText = " ";
                     elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
 
-                    if (string.IsNullOrWhiteSpace(moduleDetails.ModuleName.FirstOrDefault()))
+                    if (moduleDetails.ModuleName == null)
                     {
                         messageText = $"Oh no! I don't think I know that module. How is the module broken up in terms of continuous assesment and a final exam?";
                         elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
