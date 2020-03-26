@@ -44,8 +44,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
     private static async Task<DialogTurnResult> NameStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            await SendSuggestedActionsAsync(stepContext, cancellationToken);
-            return await stepContext.ContinueDialogAsync();
+            return await SendSuggestedActionsAsync(stepContext, cancellationToken);
             }
        
         public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -99,7 +98,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
            
 
         }
-         private static async Task SendSuggestedActionsAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+         private static async Task<DialogTurnResult> SendSuggestedActionsAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text("What should we talk about? Perhaps we can talk about extracurricular activities or UCD campus?");
 
@@ -113,6 +112,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 },
             };
             await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+            return await stepContext.NextAsync(null, cancellationToken);
         }
 
         private async Task<DialogTurnResult> FinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
