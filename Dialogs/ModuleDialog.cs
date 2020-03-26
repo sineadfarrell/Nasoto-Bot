@@ -97,7 +97,8 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             switch (luisResult.TopIntent().intent)
             {
 
-                case Luis.Conversation.Intent.discussModule:                
+                case Luis.Conversation.Intent.discussModule: 
+                if(moduleDetails.NumberOfModules.Length > 0) {              
                     if (int.TryParse(moduleDetails.NumberOfModules.FirstOrDefault(), out i))
                     {
                         var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
@@ -115,6 +116,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                         }
 
                     }
+                }
                 
 
                     var didntUnderstandMessageText3 = $"Sorry, I didn't understand that. Could you please rephrase";
