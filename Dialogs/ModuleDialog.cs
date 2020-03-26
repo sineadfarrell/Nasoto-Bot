@@ -97,8 +97,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             switch (luisResult.TopIntent().intent)
             {
 
-                case Luis.Conversation.Intent.discussModule:
-                if(!string.IsNullOrWhiteSpace(moduleDetails.NumberOfModules.FirstOrDefault())){
+                case Luis.Conversation.Intent.discussModule:                
                     if (int.TryParse(moduleDetails.NumberOfModules.FirstOrDefault(), out i))
                     {
                         var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
@@ -116,14 +115,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                         }
 
                     }
-                }
+                
 
                     var didntUnderstandMessageText3 = $"Sorry, I didn't understand that. Could you please rephrase";
                     var elsePromptMessage4 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText3, didntUnderstandMessageText3, InputHints.ExpectingInput) };
 
                     stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage4, cancellationToken);
-
+                
 
                 case Luis.Conversation.Intent.None:
                     var didntUnderstandMessageText2 = $"Sorry, I didn't understand that. Could you please rephrase";
