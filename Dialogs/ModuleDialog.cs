@@ -311,9 +311,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                     return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
 
-                case Luis.Conversation.Intent.discussLecturer:
-                    return await stepContext.BeginDialogAsync(nameof(LecturerDialog), cancellationToken); ;
-
+            
                 case Luis.Conversation.Intent.discussModule:
                     var messageText2 = $"Presumably you have a least favourite. What would you say is your least favourite module?";
                     var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(messageText2, messageText2, InputHints.ExpectingInput) };
