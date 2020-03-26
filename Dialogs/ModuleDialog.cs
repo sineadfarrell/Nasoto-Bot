@@ -92,14 +92,36 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 NumberOfModules = luisResult.Entities.NumberOfModules,
             };
 
-
+            int i = 0;
+            string[] numbers = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
             switch (luisResult.TopIntent().intent)
             {
-                case Luis.Conversation.Intent.discussModule:
 
-                    var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
-                    var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
-                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+                case Luis.Conversation.Intent.discussModule:
+                    if (int.TryParse(moduleDetails.NumberOfModules.FirstOrDefault(), out i))
+                    {
+                        var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
+                        var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
+                        return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+
+                    }
+                    foreach (string x in numbers)
+                    {
+                        if ((moduleDetails.NumberOfModules.FirstOrDefault().ToLower()).Contains(x))
+                        {
+                        var messageText = $"Ok {moduleDetails.NumberOfModules.FirstOrDefault()} modules. Which module is your favourite, mine would be secure software engineering?";
+                        var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
+                        return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+                        }
+
+                    }
+
+                    var didntUnderstandMessageText3 = $"Sorry, I didn't understand that. Could you please rephrase";
+                    var elsePromptMessage4 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText3, didntUnderstandMessageText3, InputHints.ExpectingInput) };
+
+                    stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
+                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage4, cancellationToken);
+
 
                 case Luis.Conversation.Intent.None:
                     var didntUnderstandMessageText2 = $"Sorry, I didn't understand that. Could you please rephrase";
@@ -249,9 +271,9 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
                 default:
-                var messageText = $"What are the reasons for disliking this module?";
-                var elsePromptMessage3 = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
-                return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage3, cancellationToken);
+                    var messageText = $"What are the reasons for disliking this module?";
+                    var elsePromptMessage3 = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
+                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage3, cancellationToken);
             }
 
         }
@@ -352,7 +374,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
                 default:
                     messageText = $"Oh no! I don't think I know that module. Is there a final exam for that module?";
-                        elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
+                    elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
             }
         }
