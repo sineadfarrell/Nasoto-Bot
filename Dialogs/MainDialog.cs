@@ -33,7 +33,8 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             AddDialog(extracurricularDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                NameStepAsync,
+                SendSuggestedActionsAsync,
+                // NameStepAsync,
                 ActStepAsync,
                 FinalStepAsync,
             }));
@@ -42,13 +43,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-    private static async Task<DialogTurnResult> NameStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        {
-            return await SendSuggestedActionsAsync(stepContext, cancellationToken);
-            }
+    // private static async Task<DialogTurnResult> NameStepAsync(WaterfallStepContext stepContext, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+    //     {
+    //         return await SendSuggestedActionsAsync(turnContext, cancellationToken);
+    //         }
        
         public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            
             if (!_luisRecognizer.IsConfigured)
             {
                 return await stepContext.BeginDialogAsync(nameof(UserProfileDialog), new UserProfile(), cancellationToken);
@@ -111,8 +113,9 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     
                 },
             };
-            await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-            return await stepContext.NextAsync(null, cancellationToken);
+             await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+             return await stepContext.NextAsync(null, cancellationToken);
+            
         }
 
         private async Task<DialogTurnResult> FinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)

@@ -134,7 +134,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
 
-            if (luisResult.Text.Equals("no"))
+            if (luisResult.Text.ToLower().Equals("no"))
             {
                 await stepContext.Context.SendActivityAsync(
                     MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
