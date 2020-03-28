@@ -2,41 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "AdaptiveCards/1.2.4": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
-          "Newtonsoft.Json": "11.0.2"
-        },
-        "compile": {
-          "lib/netstandard2.0/AdaptiveCards.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/AdaptiveCards.dll": {}
-        }
-      },
-      "Autofac/5.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "1.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Autofac.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Autofac.dll": {}
-        }
-      },
-      "Chronic.Signed/0.3.2": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Chronic.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Chronic.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Client/5.2.7": {
+      "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "10.0.1",
@@ -47,30 +13,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.Net.Http.Formatting.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.Core/5.2.7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Client": "5.2.7"
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebApi.WebHost/5.2.7": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.Core": "[5.2.7, 5.3.0)"
-        },
-        "compile": {
-          "lib/net45/System.Web.Http.WebHost.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Http.WebHost.dll": {}
         }
       },
       "Microsoft.AspNetCore/2.1.1": {
@@ -1684,21 +1626,13 @@
           "lib/netstandard2.0/Microsoft.Azure.Storage.Common.dll": {}
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/1.1.0": {
-        "type": "package",
-        "compile": {
-          "ref/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll": {}
-        }
-      },
-      "Microsoft.Bot.Builder/4.8.0": {
+      "Microsoft.Bot.Builder/4.7.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bot.Connector": "4.8.0",
-          "Microsoft.Bot.Streaming": "4.8.0",
-          "Microsoft.Extensions.Logging": "2.1.0"
+          "Microsoft.Bot.Connector": "4.7.2",
+          "Microsoft.Bot.Streaming": "4.7.2",
+          "Microsoft.Extensions.Logging": "2.1.0",
+          "SourceLink.Create.CommandLine": "2.8.3"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Bot.Builder.dll": {}
@@ -1790,15 +1724,16 @@
           "lib/netstandard2.0/Microsoft.Bot.Configuration.dll": {}
         }
       },
-      "Microsoft.Bot.Connector/4.8.0": {
+      "Microsoft.Bot.Connector/4.7.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bot.Schema": "4.8.0",
+          "Microsoft.Bot.Schema": "4.7.2",
           "Microsoft.Extensions.Logging": "2.1.0",
           "Microsoft.IdentityModel.Clients.ActiveDirectory": "5.2.4",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "5.6.0",
           "Microsoft.Rest.ClientRuntime": "2.3.21",
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "12.0.3",
+          "SourceLink.Create.CommandLine": "2.8.3"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Bot.Connector.dll": {}
@@ -1807,10 +1742,11 @@
           "lib/netstandard2.0/Microsoft.Bot.Connector.dll": {}
         }
       },
-      "Microsoft.Bot.Schema/4.8.0": {
+      "Microsoft.Bot.Schema/4.7.2": {
         "type": "package",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "12.0.3",
+          "SourceLink.Create.CommandLine": "2.8.3"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Bot.Schema.dll": {}
@@ -1819,7 +1755,7 @@
           "lib/netstandard2.0/Microsoft.Bot.Schema.dll": {}
         }
       },
-      "Microsoft.Bot.Streaming/4.8.0": {
+      "Microsoft.Bot.Streaming/4.7.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Logging": "2.1.0",
@@ -2610,10 +2546,11 @@
           "lib/netstandard1.3/Microsoft.IdentityModel.Clients.ActiveDirectory.dll": {}
         }
       },
-      "Microsoft.IdentityModel.JsonWebTokens/6.5.0": {
+      "Microsoft.IdentityModel.JsonWebTokens/5.6.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "6.5.0"
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "Newtonsoft.Json": "10.0.1"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.dll": {}
@@ -2622,25 +2559,13 @@
           "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.dll": {}
         }
       },
-      "Microsoft.IdentityModel.Logging/6.5.0": {
+      "Microsoft.IdentityModel.Logging/5.6.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.IdentityModel.Logging.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.IdentityModel.Logging.dll": {}
-        }
-      },
-      "Microsoft.IdentityModel.Protocol.Extensions/1.0.4.403061554": {
-        "type": "package",
-        "dependencies": {
-          "System.IdentityModel.Tokens.Jwt": "4.0.4.403061554"
-        },
-        "compile": {
-          "lib/net45/Microsoft.IdentityModel.Protocol.Extensions.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.IdentityModel.Protocol.Extensions.dll": {}
         }
       },
       "Microsoft.IdentityModel.Protocols/5.6.0": {
@@ -2686,11 +2611,11 @@
           "lib/netstandard1.4/Microsoft.IdentityModel.Protocols.WsFederation.dll": {}
         }
       },
-      "Microsoft.IdentityModel.Tokens/6.5.0": {
+      "Microsoft.IdentityModel.Tokens/5.6.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
-          "Microsoft.IdentityModel.Logging": "6.5.0",
+          "Microsoft.IdentityModel.Logging": "5.6.0",
+          "Newtonsoft.Json": "10.0.1",
           "System.Security.Cryptography.Cng": "4.5.0"
         },
         "compile": {
@@ -3067,15 +2992,6 @@
             "assetType": "runtime",
             "rid": "win"
           }
-        }
-      },
-      "Microsoft.WindowsAzure.ConfigurationManager/3.2.3": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Microsoft.WindowsAzure.Configuration.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Microsoft.WindowsAzure.Configuration.dll": {}
         }
       },
       "NETStandard.Library/2.0.3": {
@@ -3770,11 +3686,12 @@
           }
         }
       },
-      "System.IdentityModel.Tokens.Jwt/6.5.0": {
+      "System.IdentityModel.Tokens.Jwt/5.6.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "6.5.0",
-          "Microsoft.IdentityModel.Tokens": "6.5.0"
+          "Microsoft.IdentityModel.JsonWebTokens": "5.6.0",
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "Newtonsoft.Json": "10.0.1"
         },
         "compile": {
           "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll": {}
@@ -5246,57 +5163,10 @@
     }
   },
   "libraries": {
-    "AdaptiveCards/1.2.4": {
-      "sha512": "qCqnzBIY/+sd255ccl0IaGeJoJoOaYeMuybLUM/VKREHp8n83fd6rIv2Ba3wgacyoEqGWxTDRro/M4eiZR5awQ==",
+    "Microsoft.AspNet.WebApi.Client/5.2.6": {
+      "sha512": "owAlEIUZXWSnkK8Z1c+zR47A0X6ykF4XjbPok4lQKNuciUfHLGPd6QnI+rt/8KlQ17PmF+I4S3f+m+Qe4IvViw==",
       "type": "package",
-      "path": "adaptivecards/1.2.4",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "adaptivecards.1.2.4.nupkg.sha512",
-        "adaptivecards.nuspec",
-        "lib/net452/AdaptiveCards.dll",
-        "lib/netstandard1.3/AdaptiveCards.dll",
-        "lib/netstandard2.0/AdaptiveCards.dll"
-      ]
-    },
-    "Autofac/5.1.2": {
-      "sha512": "iGEx5Cm6Uor6/bZkgCHHjJO8cEQvDSOxgzNmHGJgGOnLDCe0b8NpOlhotsqx8dFvBDCsEX/V3YGRR30sRQLsxw==",
-      "type": "package",
-      "path": "autofac/5.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "autofac.5.1.2.nupkg.sha512",
-        "autofac.nuspec",
-        "icon.png",
-        "lib/net461/Autofac.dll",
-        "lib/net461/Autofac.pdb",
-        "lib/net461/Autofac.xml",
-        "lib/netstandard2.0/Autofac.dll",
-        "lib/netstandard2.0/Autofac.pdb",
-        "lib/netstandard2.0/Autofac.xml",
-        "lib/netstandard2.1/Autofac.dll",
-        "lib/netstandard2.1/Autofac.pdb",
-        "lib/netstandard2.1/Autofac.xml"
-      ]
-    },
-    "Chronic.Signed/0.3.2": {
-      "sha512": "6Az1dzHW+6Mm94yUqMze3QyLL/6uj50UcM1ZcR0+pMjU/+Cdf/3m4hXHhx36AAm1V2CGyTBph/k0xCnj6FavjQ==",
-      "type": "package",
-      "path": "chronic.signed/0.3.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "chronic.signed.0.3.2.nupkg.sha512",
-        "chronic.signed.nuspec",
-        "lib/net40/Chronic.dll"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Client/5.2.7": {
-      "sha512": "/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
-      "type": "package",
-      "path": "microsoft.aspnet.webapi.client/5.2.7",
+      "path": "microsoft.aspnet.webapi.client/5.2.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5306,35 +5176,8 @@
         "lib/netstandard2.0/System.Net.Http.Formatting.xml",
         "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
         "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
-        "microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
+        "microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
         "microsoft.aspnet.webapi.client.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Core/5.2.7": {
-      "sha512": "gM2QzApnHdy1FbKUJ/ROGJSm69P2G+HMoVd/t5Vq1O/zZ5TI4IKC9PX6nUfRt/NHgebZOIWHpB4/4K4inuy4yQ==",
-      "type": "package",
-      "path": "microsoft.aspnet.webapi.core/5.2.7",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Content/web.config.transform",
-        "lib/net45/System.Web.Http.dll",
-        "lib/net45/System.Web.Http.xml",
-        "microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
-        "microsoft.aspnet.webapi.core.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.WebHost/5.2.7": {
-      "sha512": "m3TyD7R/cmbfXqkfgcnE0J/UEKklcPP5gsXR96//vLx2kTnsxuOqNlulJLl+Oto4fZMvhVPFZVR+KG9cLZM/PA==",
-      "type": "package",
-      "path": "microsoft.aspnet.webapi.webhost/5.2.7",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/System.Web.Http.WebHost.dll",
-        "lib/net45/System.Web.Http.WebHost.xml",
-        "microsoft.aspnet.webapi.webhost.5.2.7.nupkg.sha512",
-        "microsoft.aspnet.webapi.webhost.nuspec"
       ]
     },
     "Microsoft.AspNetCore/2.1.1": {
@@ -6698,41 +6541,18 @@
         "microsoft.azure.storage.common.nuspec"
       ]
     },
-    "Microsoft.Bcl.AsyncInterfaces/1.1.0": {
-      "sha512": "1Am6l4Vpn3/K32daEqZI+FFr96OlZkgwK2LcT3pZ2zWubR5zTPW3/FkO1Rat9kb7oQOa4rxgl9LJHc5tspCWfg==",
+    "Microsoft.Bot.Builder/4.7.2": {
+      "sha512": "52/Bi5EIPgWACdMcSN7Ts71aU+J4ulGf8LNGlJqsdismJJyrl6TgBDbucHva8tg4pIrb53tYFbeUZtZaLkLFyA==",
       "type": "package",
-      "path": "microsoft.bcl.asyncinterfaces/1.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.Bcl.AsyncInterfaces.dll",
-        "lib/net461/Microsoft.Bcl.AsyncInterfaces.xml",
-        "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll",
-        "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.xml",
-        "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
-        "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.xml",
-        "microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
-        "microsoft.bcl.asyncinterfaces.nuspec",
-        "ref/net461/Microsoft.Bcl.AsyncInterfaces.dll",
-        "ref/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll",
-        "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
-        "useSharedDesignerContext.txt",
-        "version.txt"
-      ]
-    },
-    "Microsoft.Bot.Builder/4.8.0": {
-      "sha512": "6T7JPIMFQYkMSuKY83FnTbroeuE7EI7eQhrG4KnENwScurw69sn5GgYkfH2pYTweIuJWZVgD8aio7m9xo6ED1g==",
-      "type": "package",
-      "path": "microsoft.bot.builder/4.8.0",
+      "path": "microsoft.bot.builder/4.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "icon.png",
         "lib/netstandard2.0/Microsoft.Bot.Builder.dll",
+        "lib/netstandard2.0/Microsoft.Bot.Builder.pdb",
         "lib/netstandard2.0/Microsoft.Bot.Builder.xml",
-        "microsoft.bot.builder.4.8.0.nupkg.sha512",
+        "microsoft.bot.builder.4.7.2.nupkg.sha512",
         "microsoft.bot.builder.nuspec"
       ]
     },
@@ -6811,46 +6631,47 @@
         "microsoft.bot.configuration.nuspec"
       ]
     },
-    "Microsoft.Bot.Connector/4.8.0": {
-      "sha512": "1Azs7NLyvDC3iWGtYMABEUZGHK/qQcioRqft9ad8ARZFSXhL3YJQAXzDJzeInMGnmO8Wp7wrYQiCEM1Ao8RXDw==",
+    "Microsoft.Bot.Connector/4.7.2": {
+      "sha512": "YjqJA1aQxYgUsoZO5e6XCk5i0XzOPAd3l/BTqKa6rXbvJ0U2jVQXKpn6uzmbvlYAyA+zjA3EXSFSVkUltMqzWw==",
       "type": "package",
-      "path": "microsoft.bot.connector/4.8.0",
+      "path": "microsoft.bot.connector/4.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "icon.png",
         "lib/netstandard2.0/Microsoft.Bot.Connector.dll",
+        "lib/netstandard2.0/Microsoft.Bot.Connector.pdb",
         "lib/netstandard2.0/Microsoft.Bot.Connector.xml",
-        "microsoft.bot.connector.4.8.0.nupkg.sha512",
+        "microsoft.bot.connector.4.7.2.nupkg.sha512",
         "microsoft.bot.connector.nuspec"
       ]
     },
-    "Microsoft.Bot.Schema/4.8.0": {
-      "sha512": "vbQvpX+kai6iYYg/6XZF7AUvl2B9lwLlP3A4hMXp1k1YOLSFlaaMXf3EIDIH8q3aMjomKCIuGLVXDigAJTOE5w==",
+    "Microsoft.Bot.Schema/4.7.2": {
+      "sha512": "tvdF4tsBYFsgoVJyz1SD2IJv6j5A85jbHNVfrJeAO1TDU8GUPoQ5RfaixM+/bP4/UkEX/zSvD5sk5lu8jCCZJg==",
       "type": "package",
-      "path": "microsoft.bot.schema/4.8.0",
+      "path": "microsoft.bot.schema/4.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "icon.png",
         "lib/netstandard2.0/Microsoft.Bot.Schema.dll",
+        "lib/netstandard2.0/Microsoft.Bot.Schema.pdb",
         "lib/netstandard2.0/Microsoft.Bot.Schema.xml",
-        "microsoft.bot.schema.4.8.0.nupkg.sha512",
+        "microsoft.bot.schema.4.7.2.nupkg.sha512",
         "microsoft.bot.schema.nuspec"
       ]
     },
-    "Microsoft.Bot.Streaming/4.8.0": {
-      "sha512": "MTECNefERl1bzObtbPmTA2eouJnAQYOYGtaYawsSXkwWAbh1slqtTvbnrtBxAC7uk+eGlfXTYimJaWG1VayEFg==",
+    "Microsoft.Bot.Streaming/4.7.2": {
+      "sha512": "DL7P8RWLZJmr5ZF0TXWHAOYSdScRxRHX9W/yfqvTBUbJjTg+QPlmahQ1+HhS7SVnkJGHsouLlA7EdD6rX11ECg==",
       "type": "package",
-      "path": "microsoft.bot.streaming/4.8.0",
+      "path": "microsoft.bot.streaming/4.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "icon.png",
         "lib/netstandard2.0/Microsoft.Bot.Streaming.dll",
-        "lib/netstandard2.0/Microsoft.Bot.Streaming.pdb",
         "lib/netstandard2.0/Microsoft.Bot.Streaming.xml",
-        "microsoft.bot.streaming.4.8.0.nupkg.sha512",
+        "microsoft.bot.streaming.4.7.2.nupkg.sha512",
         "microsoft.bot.streaming.nuspec"
       ]
     },
@@ -7709,51 +7530,46 @@
         "microsoft.identitymodel.clients.activedirectory.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.JsonWebTokens/6.5.0": {
-      "sha512": "9h0AqqcKck8pjrX1KCfm3pLrsH/nWa6Lt5G7kCee9bfbmMa6cxHOlLtgp9sp+hXuiHsjMv4YtpPCFEoFNsHwyA==",
+    "Microsoft.IdentityModel.JsonWebTokens/5.6.0": {
+      "sha512": "0q0U1W+gX1jmfmv7uU7GXFGB518atmSwucxsVwPGpuaGS3jwd2tUi+Gau+ezxR6oAFEBFKG9lz/fxRZzGMeDXg==",
       "type": "package",
-      "path": "microsoft.identitymodel.jsonwebtokens/6.5.0",
+      "path": "microsoft.identitymodel.jsonwebtokens/5.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/Microsoft.IdentityModel.JsonWebTokens.dll",
         "lib/net45/Microsoft.IdentityModel.JsonWebTokens.xml",
+        "lib/net451/Microsoft.IdentityModel.JsonWebTokens.dll",
+        "lib/net451/Microsoft.IdentityModel.JsonWebTokens.xml",
         "lib/net461/Microsoft.IdentityModel.JsonWebTokens.dll",
         "lib/net461/Microsoft.IdentityModel.JsonWebTokens.xml",
+        "lib/netstandard1.4/Microsoft.IdentityModel.JsonWebTokens.dll",
+        "lib/netstandard1.4/Microsoft.IdentityModel.JsonWebTokens.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.xml",
-        "microsoft.identitymodel.jsonwebtokens.6.5.0.nupkg.sha512",
+        "microsoft.identitymodel.jsonwebtokens.5.6.0.nupkg.sha512",
         "microsoft.identitymodel.jsonwebtokens.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.Logging/6.5.0": {
-      "sha512": "H1QRoz+tKrNcQfRWIREWrzWLAXXp2G8YuYndS3JNGJ05HIjYg9x04fbcfh/0zV7zLRDaNfJjpwLFQJ23L6S7oQ==",
+    "Microsoft.IdentityModel.Logging/5.6.0": {
+      "sha512": "zEDrfEVW5x5w2hbTV94WwAcWvtue5hNTXYqoPh3ypF6U8csm09JazEYy+VPp2RtczkyMfcsvWY9Fea17e+isYQ==",
       "type": "package",
-      "path": "microsoft.identitymodel.logging/6.5.0",
+      "path": "microsoft.identitymodel.logging/5.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/Microsoft.IdentityModel.Logging.dll",
         "lib/net45/Microsoft.IdentityModel.Logging.xml",
+        "lib/net451/Microsoft.IdentityModel.Logging.dll",
+        "lib/net451/Microsoft.IdentityModel.Logging.xml",
         "lib/net461/Microsoft.IdentityModel.Logging.dll",
         "lib/net461/Microsoft.IdentityModel.Logging.xml",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Logging.dll",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Logging.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Logging.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Logging.xml",
-        "microsoft.identitymodel.logging.6.5.0.nupkg.sha512",
+        "microsoft.identitymodel.logging.5.6.0.nupkg.sha512",
         "microsoft.identitymodel.logging.nuspec"
-      ]
-    },
-    "Microsoft.IdentityModel.Protocol.Extensions/1.0.4.403061554": {
-      "sha512": "DLkNnlNVQNA7Mbj7TGWErfRHBjYhaHJEX/U6uz0xakSujoAKRAWdx86vK8lsog6uhLow5hb/ljY9JpW3x8q+sg==",
-      "type": "package",
-      "path": "microsoft.identitymodel.protocol.extensions/1.0.4.403061554",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/Microsoft.IdentityModel.Protocol.Extensions.XML",
-        "lib/net45/Microsoft.IdentityModel.Protocol.Extensions.dll",
-        "microsoft.identitymodel.protocol.extensions.1.0.4.403061554.nupkg.sha512",
-        "microsoft.identitymodel.protocol.extensions.nuspec"
       ]
     },
     "Microsoft.IdentityModel.Protocols/5.6.0": {
@@ -7815,20 +7631,24 @@
         "microsoft.identitymodel.protocols.wsfederation.nuspec"
       ]
     },
-    "Microsoft.IdentityModel.Tokens/6.5.0": {
-      "sha512": "43mUg9N8dTn8Eb8bRd4Z7cBOwAgJRSV3vOs76V45HJhQutodXGTH2JhLW601LFCEEjy5gH2Ab89A2OVeWyErLQ==",
+    "Microsoft.IdentityModel.Tokens/5.6.0": {
+      "sha512": "C3OqR3QfBQ7wcC7yAsdMQqay87OsV6yWPYG/Ai3n7dvmWIGkouQhXoVxRP0xz3cAFL4hxZBXyw4aLTC421PaMg==",
       "type": "package",
-      "path": "microsoft.identitymodel.tokens/6.5.0",
+      "path": "microsoft.identitymodel.tokens/5.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/Microsoft.IdentityModel.Tokens.dll",
         "lib/net45/Microsoft.IdentityModel.Tokens.xml",
+        "lib/net451/Microsoft.IdentityModel.Tokens.dll",
+        "lib/net451/Microsoft.IdentityModel.Tokens.xml",
         "lib/net461/Microsoft.IdentityModel.Tokens.dll",
         "lib/net461/Microsoft.IdentityModel.Tokens.xml",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Tokens.dll",
+        "lib/netstandard1.4/Microsoft.IdentityModel.Tokens.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.xml",
-        "microsoft.identitymodel.tokens.6.5.0.nupkg.sha512",
+        "microsoft.identitymodel.tokens.5.6.0.nupkg.sha512",
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
@@ -8433,19 +8253,6 @@
         "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
-      ]
-    },
-    "Microsoft.WindowsAzure.ConfigurationManager/3.2.3": {
-      "sha512": "pAFC2gHAuubgaw7hqSDuaEVMqip/Z0niCFVpUZ1Hg+HUw4BuMQDZnNXCm+S9SU2zPwaH8l8hXaxDXSQI438gMA==",
-      "type": "package",
-      "path": "microsoft.windowsazure.configurationmanager/3.2.3",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/Microsoft.WindowsAzure.Configuration.dll",
-        "lib/net40/Microsoft.WindowsAzure.Configuration.xml",
-        "microsoft.windowsazure.configurationmanager.3.2.3.nupkg.sha512",
-        "microsoft.windowsazure.configurationmanager.nuspec"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -10251,20 +10058,24 @@
         "system.globalization.extensions.nuspec"
       ]
     },
-    "System.IdentityModel.Tokens.Jwt/6.5.0": {
-      "sha512": "x1I1BcZrgF8CPWuR8pu6ip9wiQVSULozPSJLyAwMPt6f9bW8/u43OGxiaqLHnA0ybHrpOz3Misiu/D97gsYb+A==",
+    "System.IdentityModel.Tokens.Jwt/5.6.0": {
+      "sha512": "KMvPpX4exs2fe7Upq5zHMSR4yupc+jy8WG8yjucZL0XvT+r/T0hRvLIe9fP/SeN8/UVxFYBRAkRI5k1zbRGqmA==",
       "type": "package",
-      "path": "system.identitymodel.tokens.jwt/6.5.0",
+      "path": "system.identitymodel.tokens.jwt/5.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/System.IdentityModel.Tokens.Jwt.dll",
         "lib/net45/System.IdentityModel.Tokens.Jwt.xml",
+        "lib/net451/System.IdentityModel.Tokens.Jwt.dll",
+        "lib/net451/System.IdentityModel.Tokens.Jwt.xml",
         "lib/net461/System.IdentityModel.Tokens.Jwt.dll",
         "lib/net461/System.IdentityModel.Tokens.Jwt.xml",
+        "lib/netstandard1.4/System.IdentityModel.Tokens.Jwt.dll",
+        "lib/netstandard1.4/System.IdentityModel.Tokens.Jwt.xml",
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll",
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.xml",
-        "system.identitymodel.tokens.jwt.6.5.0.nupkg.sha512",
+        "system.identitymodel.tokens.jwt.5.6.0.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
@@ -14189,25 +14000,13 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "AdaptiveCards >= 1.2.4",
-      "Autofac >= 5.1.2",
-      "Chronic.Signed >= 0.3.2",
-      "Microsoft.AspNet.WebApi.Client >= 5.2.7",
-      "Microsoft.AspNet.WebApi.Core >= 5.2.7",
-      "Microsoft.AspNet.WebApi.WebHost >= 5.2.7",
       "Microsoft.AspNetCore.App >= 2.1.1",
-      "Microsoft.Bot.Builder >= 4.8.0",
       "Microsoft.Bot.Builder.AI.Luis >= 4.6.3",
       "Microsoft.Bot.Builder.Azure >= 4.7.2",
       "Microsoft.Bot.Builder.Dialogs >= 4.6.3",
       "Microsoft.Bot.Builder.Integration.AspNet.Core >= 4.6.3",
-      "Microsoft.IdentityModel.Protocol.Extensions >= 1.0.4.403061554",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Microsoft.Recognizers.Text.DataTypes.TimexExpression >= 1.1.5",
-      "Microsoft.Rest.ClientRuntime >= 2.3.21",
-      "Microsoft.WindowsAzure.ConfigurationManager >= 3.2.3",
-      "Newtonsoft.Json >= 12.0.3",
-      "System.IdentityModel.Tokens.Jwt >= 6.5.0"
+      "Microsoft.Recognizers.Text.DataTypes.TimexExpression >= 1.1.5"
     ]
   },
   "packageFolders": {
@@ -14217,11 +14016,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj",
+      "projectUniqueName": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot/CoreBot.csproj",
       "projectName": "CoreBot",
-      "projectPath": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj",
+      "projectPath": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot/CoreBot.csproj",
       "packagesPath": "/Users/sineadfarrell/.nuget/packages/",
-      "outputPath": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/obj/",
+      "outputPath": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -14249,39 +14048,11 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "AdaptiveCards": {
-            "target": "Package",
-            "version": "[1.2.4, )"
-          },
-          "Autofac": {
-            "target": "Package",
-            "version": "[5.1.2, )"
-          },
-          "Chronic.Signed": {
-            "target": "Package",
-            "version": "[0.3.2, )"
-          },
-          "Microsoft.AspNet.WebApi.Client": {
-            "target": "Package",
-            "version": "[5.2.7, )"
-          },
-          "Microsoft.AspNet.WebApi.Core": {
-            "target": "Package",
-            "version": "[5.2.7, )"
-          },
-          "Microsoft.AspNet.WebApi.WebHost": {
-            "target": "Package",
-            "version": "[5.2.7, )"
-          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.1, )",
             "autoReferenced": true
-          },
-          "Microsoft.Bot.Builder": {
-            "target": "Package",
-            "version": "[4.8.0, )"
           },
           "Microsoft.Bot.Builder.AI.Luis": {
             "target": "Package",
@@ -14299,10 +14070,6 @@
             "target": "Package",
             "version": "[4.6.3, )"
           },
-          "Microsoft.IdentityModel.Protocol.Extensions": {
-            "target": "Package",
-            "version": "[1.0.4.403061554, )"
-          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -14312,22 +14079,6 @@
           "Microsoft.Recognizers.Text.DataTypes.TimexExpression": {
             "target": "Package",
             "version": "[1.1.5, )"
-          },
-          "Microsoft.Rest.ClientRuntime": {
-            "target": "Package",
-            "version": "[2.3.21, )"
-          },
-          "Microsoft.WindowsAzure.ConfigurationManager": {
-            "target": "Package",
-            "version": "[3.2.3, )"
-          },
-          "Newtonsoft.Json": {
-            "target": "Package",
-            "version": "[12.0.3, )"
-          },
-          "System.IdentityModel.Tokens.Jwt": {
-            "target": "Package",
-            "version": "[6.5.0, )"
           }
         },
         "imports": [
@@ -14349,58 +14100,8 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Chronic.Signed 0.3.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Chronic.Signed",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.WebHost 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.WebHost",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'Microsoft.Azure.KeyVault.Core 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.Azure.KeyVault.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.IdentityModel.Protocol.Extensions 1.0.4.403061554' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.IdentityModel.Protocol.Extensions",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.WindowsAzure.ConfigurationManager 3.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.WindowsAzure.ConfigurationManager",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.1"
       ]
