@@ -10,7 +10,8 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
-using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
+using AdaptiveCards;
+
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
@@ -20,21 +21,21 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         protected readonly ILogger Logger;
 
         // Dependency injection uses this constructor to instantiate MainDialog
-        public MainDialog(ConversationRecognizer luisRecognizer, ExtracurricularDialog extracurricularDialog, CampusDialog campusDialog,  ILogger<MainDialog> logger)
+        public MainDialog(ConversationRecognizer luisRecognizer, ExtracurricularDialog extracurricularDialog, CampusDialog campusDialog, ILogger<MainDialog> logger)
             : base(nameof(MainDialog))
         {
             _luisRecognizer = luisRecognizer;
             Logger = logger;
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            
-    
+
+
             AddDialog(campusDialog);
             AddDialog(extracurricularDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                SendSuggestedActionsAsync,
-                // NameStepAsync,
+
+                NameStepAsync,
                 ActStepAsync,
                 FinalStepAsync,
             }));
@@ -42,15 +43,20 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             // The initial child Dialog to run
             InitialDialogId = nameof(WaterfallDialog);
         }
-
-    // private static async Task<DialogTurnResult> NameStepAsync(WaterfallStepContext stepContext, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-    //     {
-    //         return await SendSuggestedActionsAsync(turnContext, cancellationToken);
-    //         }
        
+        private static async Task<DialogTurnResult> NameStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+
+           var promptOptions = new PromptOptions { Prompt = MessageFactory.Text("What should we talk about? Extracurricular Activities or UCD campus?") };
+
+            // Ask the user to enter their name.
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
+            
+        }
+
         public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            
+
             if (!_luisRecognizer.IsConfigured)
             {
                 return await stepContext.BeginDialogAsync(nameof(UserProfileDialog), new UserProfile(), cancellationToken);
@@ -58,6 +64,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
 
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+            if(luisResult.Text.ToLower().Equals("extracurricular activities")){
+                    return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
+            }
+            if(luisResult.Text.ToLower().Equals("ucd campus") || luisResult.Text.ToLower().Equals("campus")){
+                return await stepContext.BeginDialogAsync(nameof(CampusDialog), cancellationToken);
+            }
             switch (luisResult.TopIntent().intent)
             {
                 case Luis.Conversation.Intent.discussCampus:
@@ -69,7 +81,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                         Emotion = luisResult.Entities.Emotion
                     };
                     return await stepContext.BeginDialogAsync(nameof(CampusDialog), moduleInfoCampus, cancellationToken);
-                
+
                 case Luis.Conversation.Intent.discussExtracurricular:
 
                     var moduleInfoExtra = new ModuleDetails()
@@ -85,7 +97,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     var didntUnderstandMessageText2 = $"Sorry, it is not in my capacity to talk about that. Let's try again!";
                     var didntUnderstandMessage2 = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(didntUnderstandMessage2, cancellationToken);
-                   
+
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog));
 
                 default:
@@ -94,29 +106,13 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                     stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
-                   
+
 
             }
-           
+
 
         }
-         private static async Task<DialogTurnResult> SendSuggestedActionsAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        {
-            var reply = MessageFactory.Text("What should we talk about? Perhaps we can talk about extracurricular activities or UCD campus?");
-
-            reply.SuggestedActions = new SuggestedActions()
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction() { Title = "Extracurricular Activities", Type = ActionTypes.ImBack, Value = "Extracurricular Activities"},
-                    new CardAction() { Title = "UCD Campus", Type = ActionTypes.ImBack, Value = "UCD Campus" },
-                    
-                },
-            };
-             await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-             return await stepContext.NextAsync(null, cancellationToken);
-            
-        }
+       
 
         private async Task<DialogTurnResult> FinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
