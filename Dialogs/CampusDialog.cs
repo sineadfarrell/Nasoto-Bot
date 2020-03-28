@@ -37,13 +37,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
          private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            if (!_luisRecognizer.IsConfigured)
-            {
-                await stepContext.Context.SendActivityAsync(
-                MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
-
-                return await stepContext.NextAsync(null, cancellationToken);
-            }
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
             var messageText = $"What do you think of the many campus failities, like the gym, cinema, library etc.?";

@@ -64,12 +64,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
 
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
             if(luisResult.Text.ToLower().Equals("extracurricular activities")){
                     return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
             }
             if(luisResult.Text.ToLower().Equals("ucd campus") || luisResult.Text.ToLower().Equals("campus")){
                 return await stepContext.BeginDialogAsync(nameof(CampusDialog), cancellationToken);
             }
+            else{
             switch (luisResult.TopIntent().intent)
             {
                 case Luis.Conversation.Intent.discussCampus:
@@ -94,20 +96,20 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), moduleInfoExtra, cancellationToken);
 
                 case Luis.Conversation.Intent.None:
-                    var didntUnderstandMessageText2 = $"Sorry, it is not in my capacity to talk about that. Let's try again!";
+                    var didntUnderstandMessageText2 = $"I didn't understand that. Would you prefer to talk about UCD Campus or extracurricular activities?";
                     var didntUnderstandMessage2 = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(didntUnderstandMessage2, cancellationToken);
 
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog));
 
                 default:
-                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
+                    var didntUnderstandMessageText = $"I didn't understand that. Would you prefer to talk about UCD Campus or extracurricular activities?";
                     var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
 
                     stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
 
-
+            }
             }
 
 
