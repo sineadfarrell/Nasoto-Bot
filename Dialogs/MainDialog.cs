@@ -65,13 +65,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
 
-            if(luisResult.Text.ToLower().Equals("extracurricular activities")){
-                    return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), cancellationToken);
-            }
-            if(luisResult.Text.ToLower().Equals("ucd campus") || luisResult.Text.ToLower().Equals("campus")){
-                return await stepContext.BeginDialogAsync(nameof(CampusDialog), cancellationToken);
-            }
-            else{
+            
             switch (luisResult.TopIntent().intent)
             {
                 case Luis.Conversation.Intent.discussCampus:
@@ -110,7 +104,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
 
             }
-            }
+            
 
 
         }
