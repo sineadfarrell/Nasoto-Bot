@@ -14016,11 +14016,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot/CoreBot.csproj",
+      "projectUniqueName": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj",
       "projectName": "CoreBot",
-      "projectPath": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot/CoreBot.csproj",
+      "projectPath": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/CoreBot.csproj",
       "packagesPath": "/Users/sineadfarrell/.nuget/packages/",
-      "outputPath": "/Users/sineadfarrell/Desktop/FYP/Makoto-Bot/obj/",
+      "outputPath": "/Users/sineadfarrell/Desktop/FYP/Nasoto-Bot/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
