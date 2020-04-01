@@ -376,7 +376,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     }
                     else
                     {
-                        messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either.  Is a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
+                        messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either.  Is there a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
                         elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     }
 
