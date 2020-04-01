@@ -42,7 +42,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         }
          private async Task<DialogTurnResult> firstSteoAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken){
             await stepContext.Context.SendActivityAsync("My name is Nasoto. We are going to talk about university today.");
-            await stepContext.Context.SendActivityAsync("To end the conversation at anytime say 'bye' or 'end conversation'");
+            
              
             return await stepContext.NextAsync();
         }
