@@ -120,10 +120,10 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
          private async Task<DialogTurnResult> CoronaMoveStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-             string[] stringPos;
-            stringPos = new string[20] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "you bet", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely" };
+            string[] stringPos;
+            stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
             string[] stringNeg;
-            stringNeg = new string[8] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do" };
+            stringNeg = new string[9] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do", "no thank you" };
 
            if (!_luisRecognizer.IsConfigured)
             {
