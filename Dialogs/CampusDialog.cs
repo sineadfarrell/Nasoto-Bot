@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
@@ -119,6 +120,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
          private async Task<DialogTurnResult> CoronaMoveStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+             string[] stringPos;
+            stringPos = new string[20] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "you bet", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely" };
+            string[] stringNeg;
+            stringNeg = new string[8] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do" };
+
            if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(
@@ -128,14 +134,25 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
 
-            if (luisResult.Text.ToLower().Equals("no"))
+             if (stringNeg.Any(luisResult.Text.Contains))
             {
                 await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
+                    MessageFactory.Text("Goodbye", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
+            if(stringPos.Any(luisResult.Text.Contains)){
             return await stepContext.BeginDialogAsync(nameof(CoronaDialog));
+            }
+            
+                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
+                    var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
+
+                    stepContext.ActiveDialog.State[key: "stepIndex"] = 1;
+                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+
+           
+            
 
         }
 

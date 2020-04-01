@@ -5,20 +5,21 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
     public class EndConversationDialog : ComponentDialog
     {
-         private readonly ConversationRecognizer _luisRecognizer;
+        private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
-        
-        
-        public EndConversationDialog(ConversationRecognizer luisRecognizer,  ILogger<EndConversationDialog> logger, MainDialog mainDialog)
+
+
+        public EndConversationDialog(ConversationRecognizer luisRecognizer, ILogger<EndConversationDialog> logger, MainDialog mainDialog)
             : base(nameof(EndConversationDialog))
 
-        {   
+        {
             _luisRecognizer = luisRecognizer;
             Logger = logger;
             AddDialog(new TextPrompt(nameof(TextPrompt)));
@@ -32,7 +33,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-         private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
             {
@@ -44,12 +45,17 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             // Use the text provided in FinalStepAsync or the default if it is the first time.
             var messageText = $"Do you want to end this conversation?";
-            var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
+            var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
             return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
         }
 
         private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            string[] stringPos;
+            stringPos = new string[20] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "you bet", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely" };
+            string[] stringNeg;
+            stringNeg = new string[8] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do" };
+
             if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(
@@ -58,21 +64,30 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.NextAsync(null, cancellationToken);
             }
 
-           var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
-            
-            if(luisResult.Text.Equals("yes")){
-               await stepContext.Context.SendActivityAsync(
-                    MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
+            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
+            if (stringNeg.Any(luisResult.Text.Contains))
+            {
+                await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
-            
-            var messageText = $"Ok the conversation will continue.";
-            var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
-           return await stepContext.BeginDialogAsync(nameof(MainDialog));
+            if (stringPos.Any(luisResult.Text.Contains))
+            {
+                var messageText = $"Ok the conversation will continue.";
+                var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
+                return await stepContext.BeginDialogAsync(nameof(MainDialog));
+            }
+            var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
+            var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
+
+            stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
+            return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
+
         }
 
 
-       
+
     }
 }

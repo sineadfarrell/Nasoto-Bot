@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 using System.Collections.Generic;
 
@@ -132,6 +133,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
          private async Task<DialogTurnResult> GetAnswerAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            string[] stringPos;  
+            stringPos = new string[20] {"yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "you bet", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely"}; 
+            string[] stringNeg;
+            stringNeg = new string[8] {"no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do"};
+         
 
              if (!_luisRecognizer.IsConfigured)
             {
@@ -148,19 +154,30 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 Opinion = luisResult.Entities.Opinion,
             };
              if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
-                   var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
-                    var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
+                   var didntUnderstandMessageText3 = $"I didn't understand that. Could you please rephrase";
+                    var elsePromptMessage3 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText3, didntUnderstandMessageText3, InputHints.ExpectingInput) };
+
+                    stepContext.ActiveDialog.State[key: "stepIndex"] = 2;
+                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage3, cancellationToken);
+
+            }
+
+           if(stringPos.Any(luisResult.Text.Contains)){
+                return await stepContext.BeginDialogAsync(nameof(MainDialog));
+                
+            }
+
+            if(stringNeg.Any(luisResult.Text.Contains)){
+
+         
+            return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));;    
+
+            }
+                var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
+                var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
 
                     stepContext.ActiveDialog.State[key: "stepIndex"] = 2;
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
-
-            }
-
-            if(luisResult.Text.Equals("yes")){
-                return await stepContext.BeginDialogAsync(nameof(MainDialog));
-            }
-           
-            return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));;    
 
 
         }
