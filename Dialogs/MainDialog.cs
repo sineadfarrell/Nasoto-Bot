@@ -68,6 +68,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             
             switch (luisResult.TopIntent().intent)
             {
+                
                 case Luis.Conversation.Intent.discussCampus:
                     var moduleInfoCampus = new ModuleDetails()
                     {

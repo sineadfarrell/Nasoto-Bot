@@ -10,6 +10,8 @@ using Microsoft.BotBuilderSamples.Bots;
 using Microsoft.BotBuilderSamples.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
 
+using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
 namespace Microsoft.BotBuilderSamples
 {
     public class Startup
@@ -20,6 +22,7 @@ namespace Microsoft.BotBuilderSamples
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSingleton<ICredentialProvider, ConfigurationCredentialProvider>();
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 

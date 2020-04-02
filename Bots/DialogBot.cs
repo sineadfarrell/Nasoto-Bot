@@ -59,6 +59,8 @@ namespace Microsoft.BotBuilderSamples.Bots
       //       await turnContext.SendActivityAsync("Enter anything to start our conversation.");
       //   }
 
+      
+
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -70,6 +72,12 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
+            var conversationStateAccessors =  ConversationState.CreateProperty<ConversationData>(nameof(ConversationData));
+            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new ConversationData());
+
+            var userStateAccessors = UserState.CreateProperty<UserProfile>(nameof(UserProfile));
+            var userProfile = await userStateAccessors.GetAsync(turnContext, () => new UserProfile());
+
              // preserve user input.
             var utterance = turnContext.Activity.Text;
             // make empty local logitems list.

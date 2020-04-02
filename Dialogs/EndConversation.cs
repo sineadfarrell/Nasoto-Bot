@@ -71,7 +71,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 await stepContext.Context.SendActivityAsync(
                      MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
 
-                return await stepContext.CancelAllDialogsAsync(cancellationToken);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             if (stringPos.Any(luisResult.Text.ToLower().Contains))
             {

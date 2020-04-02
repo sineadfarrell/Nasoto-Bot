@@ -58,7 +58,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
             {
-                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
+                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
             }
 
 
@@ -85,7 +85,9 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                  stepContext.ActiveDialog.State[key: "stepIndex"] =  0; 
                  return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
             }
-
+            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
+            return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
+            }
             if (userInfo.Name == null)
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok we will now begin."), cancellationToken);
@@ -93,9 +95,8 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));    
                  }
 
-            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
-            return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);;    
-                }
+              
+                
                 
                  await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok {userInfo.Name.FirstOrDefault()} we will now begin."), cancellationToken);
 
