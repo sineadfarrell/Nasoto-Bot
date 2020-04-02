@@ -229,7 +229,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
                 case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); 
 
 
 
@@ -309,7 +309,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                 case Luis.Conversation.Intent.endConversation:
 
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
 
             
                 case Luis.Conversation.Intent.discussModule:
@@ -354,7 +354,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                 case Luis.Conversation.Intent.endConversation:
 
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken);
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
 
 
                 case Luis.Conversation.Intent.None:
@@ -409,7 +409,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                 case Luis.Conversation.Intent.endConversation:
 
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
 
                 case Luis.Conversation.Intent.discussModule:
                     var messageText = $"Now we are going to talk about your lecturers.";

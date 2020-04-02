@@ -95,9 +95,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));    
                  }
 
-              
-                
-                
                  await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok {userInfo.Name.FirstOrDefault()} we will now begin."), cancellationToken);
 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));   

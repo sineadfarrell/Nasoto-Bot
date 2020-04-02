@@ -78,6 +78,13 @@ namespace Microsoft.BotBuilderSamples.Bots
             var userStateAccessors = UserState.CreateProperty<UserProfile>(nameof(UserProfile));
             var userProfile = await userStateAccessors.GetAsync(turnContext, () => new UserProfile());
 
+             if (conversationData.PromptedUserForName)
+                {
+                     await turnContext.SendActivityAsync($"Bye");
+                     conversationData.PromptedUserForName = false;
+                }
+                else{
+                   conversationData.PromptedUserForName = true;
              // preserve user input.
             var utterance = turnContext.Activity.Text;
             // make empty local logitems list.
@@ -175,5 +182,6 @@ namespace Microsoft.BotBuilderSamples.Bots
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
 
         }
+    }
     }
 }
