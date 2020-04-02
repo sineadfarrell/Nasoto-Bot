@@ -78,7 +78,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             var userStateAccessors = UserState.CreateProperty<UserProfile>(nameof(UserProfile));
             var userProfile = await userStateAccessors.GetAsync(turnContext, () => new UserProfile());
 
-             if (conversationData.PromptedUserForName)
+             if (!conversationData.PromptedUserForName)
                 {
                      await turnContext.SendActivityAsync($"Bye");
                      conversationData.PromptedUserForName = false;
