@@ -162,12 +162,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             }
 
-           if(stringPos.Any(luisResult.Text.ToLower().Contains)){
+           if(stringNeg.Any(luisResult.Text.ToLower().Contains)){
                 return await stepContext.BeginDialogAsync(nameof(MainDialog));
                 
             }
 
-            if(stringNeg.Any(luisResult.Text.ToLower().Contains)){
+            if(stringPos.Any(luisResult.Text.ToLower().Contains)){
 
          
             return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));;    
