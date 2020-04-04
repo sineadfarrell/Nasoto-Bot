@@ -40,7 +40,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
-         private async Task<DialogTurnResult> firstSteoAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken){
+
+        public UserProfileDialog(ConversationRecognizer luisRecognizer, ILogger logger)
+        {
+            _luisRecognizer = luisRecognizer;
+            Logger = logger;
+        }
+
+        private async Task<DialogTurnResult> firstSteoAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken){
             await stepContext.Context.SendActivityAsync("My name is Nasoto. We are going to talk about university today.");
             
              
@@ -67,7 +74,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var promptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
             return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = promptMessage }, cancellationToken);
         }
-
+       
     
          private async Task<DialogTurnResult> GetNameAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
 
@@ -96,7 +103,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));    
                  }
 
-                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok {userInfo.Name.FirstOrDefault()} we will now begin."), cancellationToken);
+                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok {StringExtensions.FirstCharToUpper(userInfo.Name.FirstOrDefault())} we will now begin."), cancellationToken);
 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));   
             }
