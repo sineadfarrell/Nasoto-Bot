@@ -67,7 +67,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
 
-            if (stringNeg.Any(luisResult.Text.ToLower().Contains))
+            if (stringPos.Any(luisResult.Text.ToLower().Contains))
             {
                 ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
@@ -76,7 +76,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                         
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
-            if (stringPos.Any(luisResult.Text.ToLower().Contains))
+            if (stringNeg.Any(luisResult.Text.ToLower().Contains))
             {
                 var messageText = $"Ok the conversation will continue.";
                 var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);

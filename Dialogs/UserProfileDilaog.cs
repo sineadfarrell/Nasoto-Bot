@@ -79,15 +79,16 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     };
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.None))
             {
+             if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
+            return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
+            }
                 var didntUnderstandMessageText2 = $"I didn't understand that. Could you please rephrase";
                  var elsePromptMessage2 =  new PromptOptions {Prompt = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.ExpectingInput)};
                  
                  stepContext.ActiveDialog.State[key: "stepIndex"] =  0; 
                  return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
             }
-            if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
-            return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
-            }
+           
             if (userInfo.Name == null)
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok we will now begin."), cancellationToken);

@@ -66,7 +66,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
         private async Task<DialogTurnResult> FinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-           
+                ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
                     MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
 

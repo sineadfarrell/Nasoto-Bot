@@ -88,7 +88,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
             {
-                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), moduleDetails, cancellationToken); ;
+                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), moduleDetails, cancellationToken); 
             }
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussExtracurricular))
             {
@@ -126,6 +126,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             if (stringNeg.Any(luisResult.Text.ToLower().Contains))
             {
+                ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
                     MessageFactory.Text("Goodbye", inputHint: InputHints.IgnoringInput), cancellationToken);
 

@@ -229,7 +229,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
                 case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); 
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); 
 
 
 
@@ -266,7 +266,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), cancellationToken); ;
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
 
                 case Luis.Conversation.Intent.discussModule:
                     var messageText2 = $"What are the reasons for disliking this module?";
@@ -308,8 +308,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
+                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
 
             
                 case Luis.Conversation.Intent.discussModule:
@@ -353,7 +352,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-
                     return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
 
 
@@ -408,7 +406,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-
                     return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
 
                 case Luis.Conversation.Intent.discussModule:
@@ -443,7 +440,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 ModuleName = luisResult.Entities.Module,
             };
             switch (luisResult.TopIntent().intent)
+
+        
             {
+                case Luis.Conversation.Intent.endConversation:
+                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), moduleDetails); ;
+
                 case Luis.Conversation.Intent.discussLecturer:
                     var didntUnderstandMessageText = $"That's great! Why don't we talk about your lecturers.";
                     var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
@@ -462,8 +464,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     await stepContext.Context.SendActivityAsync(didntUnderstandMessage3, cancellationToken);
                     return await stepContext.BeginDialogAsync(nameof(CampusDialog), moduleDetails, cancellationToken); ;
 
-                case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog), moduleDetails, cancellationToken); ;
+                
 
                 default:
                     var didntUnderstandMessageText4 = $"Sorry, I didn't get that. Please try rephrasing your message(intent was {luisResult.TopIntent().intent})";
