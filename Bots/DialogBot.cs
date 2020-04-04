@@ -27,7 +27,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         // Create cancellation token (used by Async Write operation).
         public CancellationToken cancellationToken { get; private set; }
         protected readonly Dialog Dialog;
-        protected readonly BotState ConversationState;
+        public readonly BotState ConversationState;
         protected readonly BotState UserState;
         protected readonly ILogger Logger;
 
@@ -72,19 +72,16 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var conversationStateAccessors =  ConversationState.CreateProperty<ConversationData>(nameof(ConversationData));
-            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new ConversationData());
+           
+            
 
-            var userStateAccessors = UserState.CreateProperty<UserProfile>(nameof(UserProfile));
-            var userProfile = await userStateAccessors.GetAsync(turnContext, () => new UserProfile());
-
-             if (!conversationData.PromptedUserForName)
+             if (ConversationData.PromptedUserForName)
                 {
                      await turnContext.SendActivityAsync($"Bye");
-                     conversationData.PromptedUserForName = false;
+                     ConversationData.PromptedUserForName = false;
                 }
                 else{
-                   conversationData.PromptedUserForName = true;
+                   
              // preserve user input.
             var utterance = turnContext.Activity.Text;
             // make empty local logitems list.

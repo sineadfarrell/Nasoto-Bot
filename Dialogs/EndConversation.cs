@@ -15,11 +15,12 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
 
-
-        public EndConversationDialog(ConversationRecognizer luisRecognizer, ILogger<EndConversationDialog> logger, MainDialog mainDialog)
+        public readonly BotState ConversationState; 
+        public EndConversationDialog(ConversationRecognizer luisRecognizer, ILogger<EndConversationDialog> logger, MainDialog mainDialog, ConversationState conversationState)
             : base(nameof(EndConversationDialog))
 
         {
+            ConversationState = conversationState;
             _luisRecognizer = luisRecognizer;
             Logger = logger;
             AddDialog(new TextPrompt(nameof(TextPrompt)));
@@ -68,9 +69,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             if (stringNeg.Any(luisResult.Text.ToLower().Contains))
             {
+                ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
                      MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
-
+                    
+                        
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             if (stringPos.Any(luisResult.Text.ToLower().Contains))
