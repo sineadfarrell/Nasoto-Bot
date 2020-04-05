@@ -75,7 +75,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     
                         
                  await stepContext.EndDialogAsync();
-                 return await stepContext.CancelAllDialogsAsync();
             }
             if (stringNeg.Any(luisResult.Text.ToLower().Contains))
             {
