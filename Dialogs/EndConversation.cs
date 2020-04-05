@@ -71,10 +71,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
                 ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
-                     MessageFactory.Text("Goodbye."));
+                     MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
                     
                         
                  await stepContext.EndDialogAsync();
+                 return await stepContext.CancelAllDialogsAsync();
             }
             if (stringNeg.Any(luisResult.Text.ToLower().Contains))
             {
