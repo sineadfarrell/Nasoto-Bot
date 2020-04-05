@@ -142,6 +142,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 Lecturer = luisResult.Entities.Lecturer,
                 Opinion = luisResult.Entities.Opinion,
             };
+            
              if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
                    var didntUnderstandMessageText3 = $"I didn't understand that. Could you please rephrase";
                     var elsePromptMessage3 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText3, didntUnderstandMessageText3, InputHints.ExpectingInput) };
@@ -152,6 +153,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
            if(stringPos.Any(luisResult.Text.ToLower().Contains)){
+               ConversationData.PromptedUserForName = true;
                 return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
                 
             }

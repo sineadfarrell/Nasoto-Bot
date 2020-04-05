@@ -57,17 +57,50 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             
-            
+            if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
+            {
+                string[] stringPos;
+                stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
+                string[] stringNeg;
+                stringNeg = new string[9] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do", "no thank you" };
+
+                var messageTextEnd = $"Are you sure you want to end our conversation?";
+                var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageTextEnd, messageTextEnd, InputHints.ExpectingInput)};
+                await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+                if (!_luisRecognizer.IsConfigured)
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
+            }
+
+            var luisResult2 = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
+            if(stringPos.Any(luisResult2.Text.ToLower().Contains)){
+                ConversationData.PromptedUserForName = true;
+               await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("Goodbye", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            if(stringNeg.Any(luisResult2.Text.ToLower().Contains)){
+            var messageTextFix = $"In gerneral would you use the facilities that are available often?";
+            var promptMessageFix = new PromptOptions { Prompt = MessageFactory.Text(messageTextFix, messageTextFix, InputHints.ExpectingInput)};
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptMessageFix, cancellationToken);
+            }
+            }
             if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
-                    var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
+                    var elsePromptMessageEnd = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
 
                     stepContext.ActiveDialog.State[key: "stepIndex"] = 0;
-                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+                    return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessageEnd, cancellationToken);
             }
             var messageText = $"In gerneral would you use the facilities that are available often?";
             var promptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), promptMessage, cancellationToken);
+        
         }
 
           private async Task<DialogTurnResult> CoronaStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -79,8 +112,42 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                 return await stepContext.NextAsync(null, cancellationToken);
             }
+            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+            if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
+            {
+                string[] stringPos;
+                stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
+                string[] stringNeg;
+                stringNeg = new string[9] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do", "no thank you" };
 
-           var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+                var messageTextEnd = $"Are you sure you want to end our conversation?";
+                var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageTextEnd, messageTextEnd, InputHints.ExpectingInput)};
+                await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+                if (!_luisRecognizer.IsConfigured)
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
+            }
+
+            var luisResult2 = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
+            if(stringPos.Any(luisResult2.Text.ToLower().Contains)){
+                ConversationData.PromptedUserForName = true;
+               await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("Goodbye", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            if(stringNeg.Any(luisResult2.Text.ToLower().Contains)){
+            var messageTextFix = $"Presumably the corona virus has affected your university experience and the general use of these facilities, how has it impacted you?";
+            var promptMessageFix = new PromptOptions { Prompt = MessageFactory.Text(messageTextFix, messageTextFix, InputHints.ExpectingInput)};
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptMessageFix, cancellationToken);
+            }
+            }
+
+           
              if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
                     var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
@@ -105,6 +172,40 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             }
 
            var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
+            if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
+            {
+                string[] stringPos;
+                stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
+                string[] stringNeg;
+                stringNeg = new string[9] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do", "no thank you" };
+
+                var messageTextEnd = $"Are you sure you want to end our conversation?";
+                var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageTextEnd, messageTextEnd, InputHints.ExpectingInput)};
+                await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
+                if (!_luisRecognizer.IsConfigured)
+            {
+                await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
+            }
+
+            var luisResult2 = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
+
+            if(stringPos.Any(luisResult2.Text.ToLower().Contains)){
+                ConversationData.PromptedUserForName = true;
+               await stepContext.Context.SendActivityAsync(
+                    MessageFactory.Text("Goodbye", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            if(stringNeg.Any(luisResult2.Text.ToLower().Contains)){
+            var messageTextFix = $"Would you like to talk more about the effect of the Corona Virus on your university experience?";
+            var promptMessageFix = new PromptOptions { Prompt = MessageFactory.Text(messageTextFix, messageTextFix, InputHints.ExpectingInput)};
+            return await stepContext.PromptAsync(nameof(TextPrompt), promptMessageFix, cancellationToken);
+            }
+            }
              if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.None)){
                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
                     var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };

@@ -51,13 +51,12 @@ namespace Microsoft.BotBuilderSamples.Bots
             public string ETag { get; set; } = "*";
         }
 
-      //   protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-      //   {
-            
-      //       await turnContext.SendActivityAsync("My name is Nasoto. We are going to talk about university today.");
-      //       await turnContext.SendActivityAsync("To end the conversation at anytime say 'bye' or 'end conversation'");
-      //       await turnContext.SendActivityAsync("Enter anything to start our conversation.");
-      //   }
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            ConversationData.PromptedUserForName = false;
+            await turnContext.SendActivityAsync("My name is Nasoto. We are going to talk about university today.");
+           
+        }
 
       
 
