@@ -71,7 +71,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
                 ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
-                     MessageFactory.Text("Goodbye.", inputHint: InputHints.IgnoringInput), cancellationToken);
+                     MessageFactory.Text("Goodbye."));
                     
                         
                  await stepContext.EndDialogAsync();
