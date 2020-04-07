@@ -152,7 +152,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                    var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";
                     var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
 
-                    stepContext.ActiveDialog.State[key: "stepIndex"] = 1;
+                    stepContext.ActiveDialog.State[key: "stepIndex"] = (int)stepContext.ActiveDialog.State["stepIndex"] - 1;
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
             }
             var messageText = $"Presumably the corona virus has affected your university experience and the general use of these facilities, how has it impacted you?";
