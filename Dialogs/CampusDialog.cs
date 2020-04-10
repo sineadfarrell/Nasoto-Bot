@@ -47,7 +47,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
         private async Task<DialogTurnResult> FacStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-             ConversationData.PromptedUserForName = false;
             if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(
@@ -106,7 +105,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
           private async Task<DialogTurnResult> CoronaStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-             ConversationData.PromptedUserForName = false;
             if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(
@@ -165,7 +163,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
          private async Task<DialogTurnResult> CoronaResponseStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-             ConversationData.PromptedUserForName = false;
             if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(
@@ -228,7 +225,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
             string[] stringNeg;
             stringNeg = new string[9] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do", "no thank you" };
-             ConversationData.PromptedUserForName = false;
+
            if (!_luisRecognizer.IsConfigured)
             {
                 await stepContext.Context.SendActivityAsync(

@@ -57,7 +57,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
 
-             ConversationData.PromptedUserForName = false;
             if (!_luisRecognizer.IsConfigured)
             {
                 return await stepContext.BeginDialogAsync(nameof(UserProfileDialog), new UserProfile(), cancellationToken);
@@ -123,7 +122,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
         private async Task<DialogTurnResult> FinalStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-             ConversationData.PromptedUserForName = false;
            string[] stringPos;
             stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
             string[] stringNeg;
