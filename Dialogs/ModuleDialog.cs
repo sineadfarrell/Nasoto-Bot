@@ -369,18 +369,18 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
                     if (moduleDetails.ModuleName == null)
                     {
-                        messageText = $"Oh no! I don't think I know that module. How is the module broken up in terms of continuous assesment and a final exam?";
+                        messageText = $"Oh no! I don't think I know that module. With the ongoing pandemic do you have a final exam for this module?";
                         elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     }
                     else
                     {
-                        messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either.  Is there a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
+                        messageText = $"I don't like {moduleDetails.ModuleName.FirstOrDefault()} either. With the ongoing pandemic is there a final exam for {moduleDetails.ModuleName.FirstOrDefault()}?";
                         elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     }
 
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
                 default:
-                    messageText = $"Oh no! I don't think I know that module. Is there a final exam for that module?";
+                    messageText = $"Oh no! I don't think I know that module. With the ongoing pandemic is there a final exam for that module?";
                     elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
             }
