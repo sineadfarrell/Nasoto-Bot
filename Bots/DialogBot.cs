@@ -69,6 +69,8 @@ namespace Microsoft.BotBuilderSamples.Bots
             await UserState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
+   
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
            
@@ -76,10 +78,9 @@ namespace Microsoft.BotBuilderSamples.Bots
 
              if (ConversationData.PromptedUserForName)
                 {
-                  ConversationData.PromptedUserForName = true;
-                   await turnContext.DeleteActivityAsync(nameof(turnContext.Activity.From.Id));
+                  ConversationData.PromptedUserForName = false;
                   await turnContext.SendActivityAsync($"Bye");
-                
+               
                 }
                 else{
                    
