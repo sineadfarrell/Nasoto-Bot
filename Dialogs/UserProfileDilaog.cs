@@ -74,6 +74,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
          private async Task<DialogTurnResult> GetNameAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
 
         {
+             ConversationData.PromptedUserForName = false;
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             var userInfo = new UserProfile()
                     {
