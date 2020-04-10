@@ -553,7 +553,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
                      MessageFactory.Text("Goodbye."));
-                    return await stepContext.EndDialogAsync(null, cancellationToken);
+                    return await stepContext.EndDialogAsync();
                  
             }
             if (stringNeg.Any(luisResult.Text.ToLower().Contains))
