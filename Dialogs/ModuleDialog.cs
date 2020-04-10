@@ -87,8 +87,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
             {
-                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
+                 await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Do you want to end this conversation?"));
+                     return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
             }
+
             var moduleDetails = new ModuleDetails()
             {
                 NumberOfModules = luisResult.Entities.NumberOfModules,
@@ -165,8 +168,13 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
 
-                case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
+                case Luis.Conversation.Intent.endConversation:if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation))
+            
+                 await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Do you want to end this conversation?"));
+                     return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
+            
+              
 
                 case Luis.Conversation.Intent.discussModule:
                     var messageText = " ";
@@ -231,7 +239,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
 
                 case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); 
+                   await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Do you want to end this conversation?"));
+                     return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
+            
+
 
 
 
@@ -310,7 +322,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-                return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
+                 await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Do you want to end this conversation?"));
+                     return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
+            
+
 
             
                 case Luis.Conversation.Intent.discussModule:
@@ -354,7 +370,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
+                    await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Do you want to end this conversation?"));
+                     return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
+            
+
 
 
                 case Luis.Conversation.Intent.None:
@@ -408,7 +428,11 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 case Luis.Conversation.Intent.endConversation:
-                    return await stepContext.BeginDialogAsync(nameof(EndConversationDialog)); ;
+               await stepContext.Context.SendActivityAsync(
+                     MessageFactory.Text("Do you want to end this conversation?"));
+                     return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
+            
+
 
                 case Luis.Conversation.Intent.discussModule:
                     var messageText = $"Now we are going to talk about your lecturers.";
@@ -531,7 +555,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             return !timexProperty.Types.Contains(Constants.TimexTypes.Definite);
         }
 
-                     private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+     private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             string[] stringPos;
             stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
