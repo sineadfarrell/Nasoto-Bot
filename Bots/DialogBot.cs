@@ -77,6 +77,7 @@ namespace Microsoft.BotBuilderSamples.Bots
              if (ConversationData.PromptedUserForName)
                 {
                   ConversationData.PromptedUserForName = true;
+                   await turnContext.DeleteActivityAsync(nameof(turnContext.Activity.From.Id));
                   await turnContext.SendActivityAsync($"Bye");
                 
                 }
