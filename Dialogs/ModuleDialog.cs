@@ -160,6 +160,9 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
                 ModuleName = luisResult.Entities.Module,
             };
+            if(luisResult.Text.ToLower().Contains("me too")){
+                moduleDetails.ModuleName[0]= "secure software engineering";
+            }
 
             switch (luisResult.TopIntent().intent)
             {
