@@ -85,7 +85,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             if(stringNeg.Any(luisResult2.Text.ToLower().Contains)){
-            var messageTextFix = $"In gerneral would you use the facilities that are available often?";
+            var messageTextFix = $"In general would you use the facilities that are available often?";
             var promptMessageFix = new PromptOptions { Prompt = MessageFactory.Text(messageTextFix, messageTextFix, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), promptMessageFix, cancellationToken);
             }
