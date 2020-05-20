@@ -8,7 +8,7 @@ Nasoto followed a conversation flow as described in the image below:
 
 ![Image description](ConversationFlow.png)
 
-The implementation of each topicin the tree can be found in the Dialogs folder. 
+The implementation of each topic in the tree can be found in the Dialogs folder. 
 
 ## Run Nasoto:
 
