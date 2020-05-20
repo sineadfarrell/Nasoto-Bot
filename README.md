@@ -10,4 +10,10 @@ Nasoto followed a conversation flow as described in the image below:
 
 ## The Chatbot can be run and tested using the webchat:
 
+To begin the conversation click the link below, a white screen will appear. On the bottom of this screen there will be an input box that says ‘Type your message’ when you are ready to begin your conversation type anything into the input box and click enter to send the message. (It can take a few seconds to connect)
+
+Your conversation with the chatbot will then begin, the conversation can take up to ten minutes.
+Converse with the chatbot by answering its questions about your university experience.  
+When you are finished conversing with the chatbot close the window. 
+
 https://webchat.botframework.com/embed/Nasoto-Bot/gemini?b=Nasoto-Bot&s=8ALbWJCVqJM.LPjEdj9-IktX32MZywE_W2JkZbS9JawxuDZmteuutU4&username=test.name
