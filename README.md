@@ -5,7 +5,8 @@ The chatbot was used to explore how personality affects the user's experience.
 Nasoto was endowed with low agreeableness and low extroversion, and discussed topics associated with University life, specific to University College Dublin. 
 
 Nasoto followed a conversation flow as described in the image below:
-![Image description]()
+
+![Image description](ConversationFlow.png)
 
 ## The Chatbot can be run and tested using the webchat:
 
