@@ -49,9 +49,6 @@ namespace Microsoft.BotBuilderSamples
 
             services.AddSingleton<UserProfileDialog>();
             
-            services.AddSingleton<TopLevelDialog>();
-
-            // // The MainDialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
 
             services.AddSingleton<CoronaDialog>();

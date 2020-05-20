@@ -16,7 +16,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
 
-
+        // Extracurricular Dialog Class
         public ExtracurricularDialog(ConversationRecognizer luisRecognizer, ILogger<ExtracurricularDialog> logger, CampusDialog campusDialog)
             : base(nameof(ExtracurricularDialog))
 
@@ -38,6 +38,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
+        // Begin Dialog-Flow
         private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
@@ -122,6 +123,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             var elsePromptMessageNeg = new PromptOptions { Prompt = MessageFactory.Text(messageTextNeg, messageTextNeg, InputHints.ExpectingInput) };
             await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessageNeg, cancellationToken);
             }
+            // Transition to Campus Dialog 
             return await stepContext.BeginDialogAsync(nameof(CampusDialog));
             }
             if (luisResult.TopIntent().Equals(Luis.Conversation.Intent.discussExtracurricular))
@@ -179,7 +181,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
     private async Task<DialogTurnResult> CampusAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            
+            // Transition to Campus Dialog 
             return await stepContext.BeginDialogAsync(nameof(CampusDialog));
 
         }

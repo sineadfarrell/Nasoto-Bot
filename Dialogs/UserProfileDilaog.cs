@@ -12,16 +12,18 @@ using Microsoft.Bot.Builder.Dialogs.Choices;
 namespace Microsoft.BotBuilderSamples.Dialogs
 
 {
+    // Dialog to collect initial information from the user 
     public class UserProfileDialog : ComponentDialog
     {
        
         private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
 
+          // Initialise the dialog
+
        public UserProfileDialog(ConversationRecognizer luisRecognizer,  ILogger<UserProfileDialog> logger, EndConversationDialog endConversationDialog, ModuleDialog moduleDialog)
             : base(nameof(UserProfileDialog))
         {
-            // _userProfileAccessor = userState.CreateProperty<UserProfile>("UserProfile");
             _luisRecognizer = luisRecognizer;
             Logger = logger;
             
@@ -30,24 +32,16 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             AddDialog(moduleDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-           
             IntroStepAsync,
             GetNameAsync,
-            
-
             }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-        public UserProfileDialog(ConversationRecognizer luisRecognizer, ILogger logger)
-        {
-            _luisRecognizer = luisRecognizer;
-            Logger = logger;
-        }
 
-
+    // Begin Dialog 
        private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
@@ -84,8 +78,8 @@ namespace Microsoft.BotBuilderSamples.Dialogs
              if(luisResult.TopIntent().Equals(Luis.Conversation.Intent.endConversation)){
                   await stepContext.Context.SendActivityAsync(
                      MessageFactory.Text("Do you want to end this conversation?"));
+                    //  EndConversation
                      return await stepContext.ReplaceDialogAsync(nameof(EndStepAsync));
-            // return await stepContext.BeginDialogAsync(nameof(EndConversationDialog));
             }
                 var didntUnderstandMessageText2 = $"I didn't understand that. Could you please rephrase";
                  var elsePromptMessage2 =  new PromptOptions {Prompt = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.ExpectingInput)};
@@ -97,15 +91,16 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             if (userInfo.Name == null)
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok we will now begin."), cancellationToken);
-
+                // begin Module Dialog 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));    
                  }
 
                  await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Ok {StringExtensions.FirstCharToUpper(userInfo.Name.FirstOrDefault())} we will now begin."), cancellationToken);
-
+                // begin ModuleDialog 
                 return await stepContext.BeginDialogAsync(nameof(ModuleDialog));   
             }
 
+            // EndConversation 
              private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             string[] stringPos;
@@ -128,6 +123,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
                      MessageFactory.Text("Goodbye."));
+                    //  End dialog 
                     return await stepContext.EndDialogAsync();
                  
             }
@@ -135,6 +131,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
                 var messageText = $"Ok the conversation will continue.";
                 var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
+                // Begin MainDialog - to chose what to talk about 
                 return await stepContext.BeginDialogAsync(nameof(MainDialog));
             }
             var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";

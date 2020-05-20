@@ -6,10 +6,11 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
+
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
+    // Campus Dialog Class
     public class CampusDialog : ComponentDialog
     {
          private readonly ConversationRecognizer _luisRecognizer;
@@ -36,6 +37,8 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
+
+        // Begin Campus Dialog-Flow
          private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
 
@@ -244,6 +247,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             if(stringPos.Any(luisResult.Text.ToLower().Contains)){
+                // Transition to Coronavirus discussion 
             return await stepContext.BeginDialogAsync(nameof(CoronaDialog));
             }
             

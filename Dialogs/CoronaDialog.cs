@@ -9,6 +9,7 @@ using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
+    // Class added to Discuss Covid-19 
     public class CoronaDialog : ComponentDialog
     {
          private readonly ConversationRecognizer _luisRecognizer;

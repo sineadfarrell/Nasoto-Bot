@@ -10,12 +10,15 @@ using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
+    // EndConversation Dialog Class 
     public class EndConversationDialog : ComponentDialog
     {
         private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
 
         public readonly BotState ConversationState; 
+
+        // Begin EndConversation Dialog-Flow
         public EndConversationDialog(ConversationRecognizer luisRecognizer, ILogger<EndConversationDialog> logger, MainDialog mainDialog, ConversationState conversationState)
             : base(nameof(EndConversationDialog))
 
@@ -69,6 +72,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
 
             if (stringPos.Any(luisResult.Text.ToLower().Contains))
             {
+                // Ensure conversation doesn't restart 
                 ConversationData.PromptedUserForName = true;
                 await stepContext.Context.SendActivityAsync(
                      MessageFactory.Text("Goodbye."));
@@ -79,6 +83,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
                 var messageText = $"Ok the conversation will continue.";
                 var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
+                // Transition to Main Dialog 
                 return await stepContext.BeginDialogAsync(nameof(MainDialog));
             }
             var didntUnderstandMessageText = $"I didn't understand that. Could you please rephrase";

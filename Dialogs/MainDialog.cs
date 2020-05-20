@@ -36,7 +36,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             {
 
                 NameStepAsync,
-                ActStepAsync,
+                ChoiceStepAsync,
                 FinalStepAsync,
             }));
 
@@ -54,69 +54,60 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             
         }
 
-        public async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        public async Task<DialogTurnResult> ChoiceStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-
+            // Ensure LUIS is configured correctly
             if (!_luisRecognizer.IsConfigured)
             {
-                return await stepContext.BeginDialogAsync(nameof(UserProfileDialog), new UserProfile(), cancellationToken);
+                await stepContext.Context.SendActivityAsync(
+                MessageFactory.Text("NOTE: LUIS is not configured. To enable all capabilities, add 'LuisAppId', 'LuisAPIKey' and 'LuisAPIHostName' to the web.config file.", inputHint: InputHints.IgnoringInput), cancellationToken);
+
+                return await stepContext.NextAsync(null, cancellationToken);
             }
 
-
+            // get user input and send it to LUIS for analysis
             var luisResult = await _luisRecognizer.RecognizeAsync<Luis.Conversation>(stepContext.Context, cancellationToken);
 
-             string[] stringPos;
-            stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
-            string[] stringNeg;
-            stringNeg = new string[9] { "no", "nope", "no thanks", "unfortunately not", "apologies", "nah", "not now", "no can do", "no thank you" };
 
+            // get the highest predicted intent from LUIS
             switch (luisResult.TopIntent().intent)
             {
-           
+                // if intent is endConversation confirm conversation has ended 
                 case Luis.Conversation.Intent.endConversation:
-                 var messageText = $"Do you want to end this conversation?";
+                var messageText = $"Do you want to end this conversation?";
                 var elsePromptMessage = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput) };
+
                 return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage, cancellationToken);
-                    
+                
+                 // if intent is discussCampus begin dialog about UCD Campus
                 case Luis.Conversation.Intent.discussCampus:
-                    var moduleInfoCampus = new ModuleDetails()
-                    {
-                        ModuleName = luisResult.Entities.Module,
-                        Opinion = luisResult.Entities.Opinion,
-                        Lecturer = luisResult.Entities.Lecturer,
-                        Emotion = luisResult.Entities.Emotion
-                    };
-                    return await stepContext.BeginDialogAsync(nameof(CampusDialog), moduleInfoCampus, cancellationToken);
+                    return await stepContext.BeginDialogAsync(nameof(CampusDialog));
 
+                // if intent is discussExtracurricular begin dialog about extracurricular activities
                 case Luis.Conversation.Intent.discussExtracurricular:
+                    return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog));
 
-                    var moduleInfoExtra = new ModuleDetails()
-                    {
-                        ModuleName = luisResult.Entities.Module,
-                        Opinion = luisResult.Entities.Opinion,
-                        Lecturer = luisResult.Entities.Lecturer,
-                        Emotion = luisResult.Entities.Emotion
-                    };
-                    return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), moduleInfoExtra, cancellationToken);
 
+                // if none intent ask to rephrase and begin this dialog again 
                 case Luis.Conversation.Intent.None:
-                    var didntUnderstandMessageText2 = $"I didn't understand that. Would you prefer to talk about UCD Campus or extracurricular activities?";
-                    var didntUnderstandMessage2 = MessageFactory.Text(didntUnderstandMessageText2, didntUnderstandMessageText2, InputHints.IgnoringInput);
-                    await stepContext.Context.SendActivityAsync(didntUnderstandMessage2, cancellationToken);
+                    var didntUnderstandMessageText = $"I didn't understand that. Would you prefer to talk about UCD Campus or extracurricular activities?";
 
+
+                    var didntUnderstandMessage = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
+                    await stepContext.Context.SendActivityAsync(didntUnderstandMessage, cancellationToken);
                     return await stepContext.ReplaceDialogAsync(nameof(MainDialog));
 
+                // if another intent (discussModule, discussLecturer) ask to rephrase and begin this dialog again 
                 default:
-                    var didntUnderstandMessageText = $"I didn't understand that. Would you prefer to talk about UCD Campus or extracurricular activities?";
-                    var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.ExpectingInput) };
+                    var didntUnderstandMessageTextDefault = $"I didn't understand that. Would you prefer to talk about UCD Campus or extracurricular activities?";
+                    
+                    var elsePromptMessage2 = new PromptOptions { Prompt = MessageFactory.Text(didntUnderstandMessageTextDefault, didntUnderstandMessageTextDefault, InputHints.ExpectingInput) };
 
                     stepContext.ActiveDialog.State[key: "stepIndex"] = (int)stepContext.ActiveDialog.State["stepIndex"] - 1;
                     return await stepContext.PromptAsync(nameof(TextPrompt), elsePromptMessage2, cancellationToken);
 
             }
             
-
-
         }
        
 

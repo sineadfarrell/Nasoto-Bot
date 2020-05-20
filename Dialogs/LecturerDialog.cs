@@ -6,8 +6,6 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
-using System.Collections.Generic;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
@@ -16,13 +14,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
          private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
         
-        
+        //  Lecturer Dialog Class
         public LecturerDialog(ConversationRecognizer luisRecognizer,  ILogger<LecturerDialog> logger, MainDialog mainDialog, EndConversationDialog endConversationDialog, ExtracurricularDialog extracurricularDialog )
             : base(nameof(LecturerDialog))
 
         {   
             _luisRecognizer = luisRecognizer;
             Logger = logger;
+            // Dialog flow
             AddDialog(new TextPrompt(nameof(TextPrompt)));
             AddDialog(endConversationDialog);
             AddDialog(extracurricularDialog);
@@ -38,6 +37,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
+        // Begin Lecturer Dialog-Flow
          private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
@@ -87,7 +87,6 @@ namespace Microsoft.BotBuilderSamples.Dialogs
            
             default:
             var messageText = $"Ok. Presumably they are not all like this?";
-            // var elsePromptMessage = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput);
             var messageFac = new PromptOptions { Prompt = MessageFactory.Text(messageText, messageText, InputHints.ExpectingInput)};
             return await stepContext.PromptAsync(nameof(TextPrompt), messageFac, cancellationToken);
             }

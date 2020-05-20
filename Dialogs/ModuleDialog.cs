@@ -12,13 +12,11 @@ using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 
 namespace Microsoft.BotBuilderSamples.Dialogs
 {
-    public class ModuleDialog : ComponentDialog
+    //  Module Dialog Class
+        public class ModuleDialog : ComponentDialog
     {
         private readonly ConversationRecognizer _luisRecognizer;
         protected readonly ILogger Logger;
-
-
-
 
         public ModuleDialog(ConversationRecognizer luisRecognizer, ILogger<ModuleDialog> logger, LecturerDialog lecturerDialog, ExtracurricularDialog extracurricularDialog, EndConversationDialog endConversationDialog, CampusDialog campusDialog)
             : base(nameof(ModuleDialog))
@@ -43,13 +41,14 @@ namespace Microsoft.BotBuilderSamples.Dialogs
                 LeastFavModuleAsync,
                 ExamorCaLeastAsync,
                 OpinionLeastAsync,
-                // FinalStepAsync,
-                // NextDialogAsync,
+
             }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
+
+        // Begin Module dialog flow 
         private async Task<DialogTurnResult> IntroStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (!_luisRecognizer.IsConfigured)
@@ -524,14 +523,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
             return await stepContext.BeginDialogAsync(nameof(ExtracurricularDialog), moduleDetails, cancellationToken); ;
         }
 
-
-        private static bool IsAmbiguous(string timex)
-        {
-            var timexProperty = new TimexProperty(timex);
-            return !timexProperty.Types.Contains(Constants.TimexTypes.Definite);
-        }
-
-                     private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> EndStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             string[] stringPos;
             stringPos = new string[21] { "yes", "ye", "yep", "ya", "yas", "totally", "sure", "ok", "k", "okey", "okay", "alright", "sounds good", "sure thing", "of course", "gladly", "definitely", "indeed", "absolutely","yes please", "please" };
