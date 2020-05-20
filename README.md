@@ -8,7 +8,9 @@ Nasoto followed a conversation flow as described in the image below:
 
 ![Image description](ConversationFlow.png)
 
-## The Chatbot can be run and tested using the webchat:
+The implementation of each topicin the tree can be found in the Dialogs folder. 
+
+## Run Nasoto:
 
 To begin the conversation click the link below, a white screen will appear. On the bottom of this screen there will be an input box that says ‘Type your message’ when you are ready to begin your conversation type anything into the input box and click enter to send the message. (It can take a few seconds to connect)
 
